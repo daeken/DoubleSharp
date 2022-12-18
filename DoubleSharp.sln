@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleSharp", "DoubleSharp\DoubleSharp.csproj", "{EAC65844-1E84-4479-84E5-36231CCABCB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{CF0687E1-2CC0-4364-97E9-D15EB6B41B50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0687E1-2CC0-4364-97E9-D15EB6B41B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0687E1-2CC0-4364-97E9-D15EB6B41B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0687E1-2CC0-4364-97E9-D15EB6B41B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0687E1-2CC0-4364-97E9-D15EB6B41B50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
