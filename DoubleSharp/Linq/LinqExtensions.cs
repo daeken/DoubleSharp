@@ -58,4 +58,9 @@ public static class LinqExtensions {
 		list.Shuffle();
 		return list;
 	}
+
+	public static int ArgMax<T>(this ICollection<T> collection) =>
+		collection.Enumerate().MaxBy(x => x.x).i;
+	public static int ArgMax<T, U>(this ICollection<T> collection, Func<T, U> by) =>
+		collection.Enumerate().MaxBy(x => by(x.x)).i;
 }
