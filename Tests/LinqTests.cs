@@ -31,4 +31,76 @@ public class LinqTests {
 		Enumerable.Range(0, 1000).AsParallel().ForEach(i => coll.Add(i));
 		Assert.That(coll.Sum(), Is.EqualTo(499500));
 	}
+
+	[Test]
+	public void DictGroupBy() {
+		var data = new (int Rank, string Name)[] {
+			(10, "Alice"),
+			(5, "Bob"),
+			(5, "Charlie")
+		};
+		var dict = data.DictGroupBy(x => x.Rank);
+		Assert.Multiple(() => {
+			Assert.That(dict, Has.Count.EqualTo(2));
+			var rank5 = dict[5].OrderBy(x => x.Name).ToList();
+			var rank10 = dict[10].ToList();
+			Assert.That(rank10, Has.Count.EqualTo(1));
+			Assert.That(rank5, Has.Count.EqualTo(2));
+			Assert.That(rank10[0].Name, Is.EqualTo("Alice"));
+			Assert.That(rank5[0].Name, Is.EqualTo("Bob"));
+			Assert.That(rank5[1].Name, Is.EqualTo("Charlie"));
+		});
+
+		var dict2 = data.DictGroupBy(x => x.Rank, x => x.Name);
+		Assert.Multiple(() => {
+			Assert.That(dict2, Has.Count.EqualTo(2));
+			var rank5 = dict2[5].Order().ToList();
+			var rank10 = dict2[10].ToList();
+			Assert.That(rank10, Has.Count.EqualTo(1));
+			Assert.That(rank5, Has.Count.EqualTo(2));
+			Assert.That(rank10[0], Is.EqualTo("Alice"));
+			Assert.That(rank5[0], Is.EqualTo("Bob"));
+			Assert.That(rank5[1], Is.EqualTo("Charlie"));
+		});
+	}
+
+	[Test]
+	public void DictGroupByLists() {
+		var data = new (int Rank, string Name)[] {
+			(10, "Alice"),
+			(5, "Bob"),
+			(5, "Charlie")
+		};
+		var dict = data.DictGroupByLists(x => x.Rank);
+		Assert.Multiple(() => {
+			Assert.That(dict, Has.Count.EqualTo(2));
+			var rank5 = dict[5].OrderBy(x => x.Name).ToList();
+			Assert.That(dict[10], Has.Count.EqualTo(1));
+			Assert.That(rank5, Has.Count.EqualTo(2));
+			Assert.That(dict[10][0].Name, Is.EqualTo("Alice"));
+			Assert.That(rank5[0].Name, Is.EqualTo("Bob"));
+			Assert.That(rank5[1].Name, Is.EqualTo("Charlie"));
+		});
+
+		var dict2 = data.DictGroupByLists(x => x.Rank, x => x.Name);
+		Assert.Multiple(() => {
+			Assert.That(dict2, Has.Count.EqualTo(2));
+			var rank5 = dict2[5].Order().ToList();
+			Assert.That(dict2[10], Has.Count.EqualTo(1));
+			Assert.That(rank5, Has.Count.EqualTo(2));
+			Assert.That(dict2[10][0], Is.EqualTo("Alice"));
+			Assert.That(rank5[0], Is.EqualTo("Bob"));
+			Assert.That(rank5[1], Is.EqualTo("Charlie"));
+		});
+	}
+
+	[Test]
+	public void Flatten() {
+		var data = new[] {
+			new[] { "Hello", "World!" },
+			new[] { "How", "are", "you?" }
+		};
+		var str = string.Join(" ", data.Flatten());
+		Assert.That(str, Is.EqualTo("Hello World! How are you?"));
+	}
 }

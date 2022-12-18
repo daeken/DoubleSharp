@@ -18,4 +18,27 @@ public static class LinqExtensions {
 		while(enumerator.MoveNext()) {}
 		enumerator.Dispose();
 	}
+
+	public static Dictionary<TKey, IEnumerable<TValue>> DictGroupBy<TKey, TValue>(
+		this IEnumerable<TValue> query, Func<TValue, TKey> by
+	) where TKey : notnull =>
+		query.GroupBy(by).ToDictionary(x => x.Key, x => (IEnumerable<TValue>) x);
+
+	public static Dictionary<TKey, IEnumerable<TReduced>> DictGroupBy<TValue, TKey, TReduced>(
+		this IEnumerable<TValue> query, Func<TValue, TKey> by, Func<TValue, TReduced> reduce
+	) where TKey : notnull =>
+		query.GroupBy(by).ToDictionary(x => x.Key, x => x.Select(reduce));
+
+	public static Dictionary<TKey, List<TValue>> DictGroupByLists<TKey, TValue>(
+		this IEnumerable<TValue> query, Func<TValue, TKey> by
+	) where TKey : notnull =>
+		query.GroupBy(by).ToDictionary(x => x.Key, x => x.ToList());
+
+	public static Dictionary<TKey, List<TReduced>> DictGroupByLists<TValue, TKey, TReduced>(
+		this IEnumerable<TValue> query, Func<TValue, TKey> by, Func<TValue, TReduced> reduce
+	) where TKey : notnull =>
+		query.GroupBy(by).ToDictionary(x => x.Key, x => x.Select(reduce).ToList());
+
+	public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> query) =>
+		query.SelectMany(x => x);
 }
