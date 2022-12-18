@@ -19,20 +19,20 @@ public static class Rng {
     /// <summary>Gets the <see cref="System.Random"/> instance for the current thread.</summary>
     static System.Random Random => LocalRandom.Value!;
 
-	/// <summary>
-	/// Returns a non-negative random integer from the thread-local random number generator.
-	/// </summary>
-	/// <returns>A 32-bit signed integer that is greater than or equal to 0 and less than <see cref="Int32.MaxValue"/>.</returns>
-	public static int Next() => Random.Next();
+    /// <summary>
+    /// Returns a non-negative random integer from the thread-local random number generator.
+    /// </summary>
+    /// <returns>A 32-bit signed integer that is greater than or equal to 0 and less than <see cref="Int32.MaxValue"/>.</returns>
+    public static int Next() => Random.Next();
 
     /// <summary>
     /// Returns a non-negative random integer that is less than the specified maximum, from the thread-local random number generator.
     /// </summary>
     /// <param name="maxValue">The exclusive upper bound of the random number to be generated. <paramref name="maxValue"/> must be greater than or equal to 0.</param>
     /// <returns>
-	/// A 32-bit signed integer that is greater than or equal to 0, and less than <paramref name="maxValue"/>; that is, the range of return values ordinarily
+    /// A 32-bit signed integer that is greater than or equal to 0, and less than <paramref name="maxValue"/>; that is, the range of return values ordinarily
     /// includes 0 but not <paramref name="maxValue"/>. However, if <paramref name="maxValue"/> equals 0, <paramref name="maxValue"/> is returned.
-	/// </returns>
+    /// </returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="maxValue"/> is less than 0.</exception>
     public static int Next(int maxValue) => Random.Next(maxValue);
 
