@@ -1,3 +1,5 @@
+using DoubleSharp.Random;
+
 namespace DoubleSharp.Linq; 
 
 public static class LinqExtensions {
@@ -41,4 +43,19 @@ public static class LinqExtensions {
 
 	public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> query) =>
 		query.SelectMany(x => x);
+	
+	public static void Shuffle<T>(this IList<T> list) {
+		var n = list.Count;
+		while(n > 1) {
+			n--;
+			var k = Rng.Next(n + 1);
+			(list[k], list[n]) = (list[n], list[k]);
+		}
+	}
+
+	public static List<T> Shuffled<T>(this IEnumerable<T> query) {
+		var list = query.ToList();
+		list.Shuffle();
+		return list;
+	}
 }
