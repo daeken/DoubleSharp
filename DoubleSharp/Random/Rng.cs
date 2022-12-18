@@ -83,7 +83,7 @@ public static class Rng {
     /// <returns>A double-precision floating point number that is greater than or equal to 0.0, and less than 1.0.</returns>
     public static double NextDouble() => Random.NextDouble();
 
-    /// <summary>Returns a random floating-point number that is greater than or equal to 0.0, and less than 1.0, from the thread-local random number generator..</summary>
+    /// <summary>Returns a random floating-point number that is greater than or equal to 0.0, and less than 1.0, from the thread-local random number generator.</summary>
     /// <returns>A single-precision floating point number that is greater than or equal to 0.0, and less than 1.0.</returns>
     public static double NextSingle() => Random.NextSingle();
 }
