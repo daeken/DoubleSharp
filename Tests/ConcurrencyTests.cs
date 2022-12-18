@@ -56,4 +56,24 @@ public class ConcurrencyTests {
 		Parallel.For(0, 10000, _ => count4.Decrement());
 		Assert.That(count4, Is.EqualTo(0UL));
 	}
+
+	[Test]
+	public void Add() {
+		var count1 = 0;
+		Parallel.For(0, 10000, _ => count1.Add(3));
+		Assert.That(count1, Is.EqualTo(30000));
+		Assert.That(count1.Add(5), Is.EqualTo(30005));
+		var count2 = 0U;
+		Parallel.For(0, 10000, _ => count2.Add(3U));
+		Assert.That(count2, Is.EqualTo(30000));
+		Assert.That(count2.Add(5U), Is.EqualTo(30005U));
+		var count3 = 0L;
+		Parallel.For(0, 10000, _ => count3.Add(3L));
+		Assert.That(count3, Is.EqualTo(30000L));
+		Assert.That(count3.Add(5L), Is.EqualTo(30005L));
+		var count4 = 0UL;
+		Parallel.For(0, 10000, _ => count4.Add(3UL));
+		Assert.That(count4, Is.EqualTo(30000UL));
+		Assert.That(count4.Add(5UL), Is.EqualTo(30005UL));
+	}
 }

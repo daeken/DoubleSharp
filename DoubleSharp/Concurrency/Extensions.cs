@@ -32,4 +32,13 @@ public static class Extensions {
 		Interlocked.Decrement(ref value);
 	public static long Decrement(this ref long value) =>
 		Interlocked.Decrement(ref value);
+
+	public static int Add(this ref int left, int right) =>
+		Interlocked.Add(ref left, right);
+	public static long Add(this ref long left, long right) =>
+		Interlocked.Add(ref left, right);
+	public static uint Add(this ref uint left, uint right) =>
+		Interlocked.Add(ref left, right);
+	public static ulong Add(this ref ulong left, ulong right) =>
+		Interlocked.Add(ref left, right);
 }
