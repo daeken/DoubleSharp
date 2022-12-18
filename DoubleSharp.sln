@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{328519EB-865C-4A2C-862F-9B9EFC39A693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleSharp", "DoubleSharp\DoubleSharp.csproj", "{EAC65844-1E84-4479-84E5-36231CCABCB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{328519EB-865C-4A2C-862F-9B9EFC39A693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328519EB-865C-4A2C-862F-9B9EFC39A693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328519EB-865C-4A2C-862F-9B9EFC39A693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328519EB-865C-4A2C-862F-9B9EFC39A693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC65844-1E84-4479-84E5-36231CCABCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
