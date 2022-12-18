@@ -113,4 +113,14 @@ public class LinqTests {
 			Assert.That(new[] { 0, 0, 1 }.ArgMax(), Is.EqualTo(2));
 		});
 	}
+
+	[Test]
+	public void ArgMaxBy() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { (1, false), (0, false), (0, false) }.ArgMax(x => x.Item1), Is.EqualTo(0));
+			Assert.That(new[] { (0, false), (1, false), (0, false) }.ArgMax(x => x.Item1), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (1, false), (1, false) }.ArgMax(x => x.Item1), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (0, false), (1, false) }.ArgMax(x => x.Item1), Is.EqualTo(2));
+		});
+	}
 }
