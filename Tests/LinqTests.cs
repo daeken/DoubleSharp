@@ -103,4 +103,14 @@ public class LinqTests {
 		var str = string.Join(" ", data.Flatten());
 		Assert.That(str, Is.EqualTo("Hello World! How are you?"));
 	}
+
+	[Test]
+	public void ArgMax() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { 1, 0, 0 }.ArgMax(), Is.EqualTo(0));
+			Assert.That(new[] { 0, 1, 0 }.ArgMax(), Is.EqualTo(1));
+			Assert.That(new[] { 0, 1, 1 }.ArgMax(), Is.EqualTo(1));
+			Assert.That(new[] { 0, 0, 1 }.ArgMax(), Is.EqualTo(2));
+		});
+	}
 }
