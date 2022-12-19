@@ -8,6 +8,7 @@ DoubleSharp provides convenience features for:
 - Functional: `Compose` allowing function composition
 - Progress: `WithProgress` and `WithTimedProgress` extension methods on `IEnumerable`/`ICollection` providing parallel-friendly progress bars
 - Random: `Rng` providing a static class with automatic per-CPU seeds
+- Pretty: `ToPrettyString` extension method for all objects to convert it to a human-readable form; `Print` and `PrettyPrint` extension methods (aliases) to print that to the console, akin to Python's `pprint` module
 
 Our general goal is to make C# even easier to use than it is right now. If it's something we have to write in several projects, it should be here instead.
 
