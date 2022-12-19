@@ -6,6 +6,7 @@ namespace DoubleSharp.Pretty;
 
 public static class PrettyExtensions {
 	static readonly IReadOnlyDictionary<Type, MethodInfo> Printers;
+	[ExcludeFromCodeCoverage]
 	static PrettyExtensions() {
 		var printers = new Dictionary<Type, MethodInfo>();
 		foreach(var asm in AppDomain.CurrentDomain.GetAssemblies()) {
@@ -99,7 +100,7 @@ public static class PrettyExtensions {
 		var fields = type.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 		var prefix = type.FullName + " {";
 		switch(fields.Length) {
-			case 0: return prefix;
+			case 0: return prefix + " }";
 			case 1: return prefix + $" {fields[0].Name} = {fields[0].GetValue(obj).ToPrettyString()} }}";
 			default:
 				return prefix + "\n" + string.Join(", \n", fields.Select(field => Indentify(field.Name + " = " + field.GetValue(obj).ToPrettyString()))) + "\n}";
@@ -107,6 +108,7 @@ public static class PrettyExtensions {
 	}
 		
 	[PrettyPrinter]
+	[ExcludeFromCodeCoverage]
 	// ReSharper disable once UnusedMember.Local
 	static string PrettyPrintThis(string value) {
 		var ret = value.Aggregate("\"", (current, c) => current + c switch {
@@ -145,6 +147,7 @@ public static class PrettyExtensions {
 			: name;
 
 	[PrettyPrinter]
+	[ExcludeFromCodeCoverage]
 	// ReSharper disable once UnusedMember.Local
 	static string PrettyPrintThis(Type type) =>
 		type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)

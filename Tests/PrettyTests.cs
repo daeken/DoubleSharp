@@ -1,11 +1,12 @@
 using DoubleSharp.Pretty;
+// ReSharper disable UseArrayEmptyMethod
 
 namespace Tests; 
 
 [TestFixture]
 public class PrettyTests {
 	[Test]
-	public void StringTest() {
+	public void String() {
 		Assert.Multiple(() => {
 			Assert.That("foo".ToPrettyString(), Is.EqualTo("\"foo\""));
 			Assert.That("fo\no".ToPrettyString(), Is.EqualTo("\"fo\\no\""));
@@ -14,7 +15,7 @@ public class PrettyTests {
 	}
 
 	[Test]
-	public void TypeTest() {
+	public void Type() {
 		Assert.Multiple(() => {
 			Assert.That(typeof(string).ToPrettyString(), Is.EqualTo("string"));
 			Assert.That(typeof(string[]).ToPrettyString(), Is.EqualTo("string[]"));
@@ -33,9 +34,12 @@ public class PrettyTests {
 	}
 
 	[Test]
-	public void SimpleCollectionTest() {
+	public void SimpleCollection() {
 		Assert.Multiple(() => {
 			Assert.That(new[] { 1, 2, 3, 4, 5, 6 }.ToPrettyString(), Is.EqualTo("int[6] {\n\t1, \n\t2, \n\t3, \n\t4, \n\t5, \n\t6\n}"));
+#pragma warning disable CA1825
+			Assert.That(new int[0].ToPrettyString(), Is.EqualTo("int[0]"));
+#pragma warning restore CA1825
 			Assert.That(new List<int> { 1, 2, 3, 4, 5, 6 }.ToPrettyString(), Is.EqualTo("List<int>[6] {\n\t1, \n\t2, \n\t3, \n\t4, \n\t5, \n\t6\n}"));
 			Assert.That(new List<string> { "Hello", "World!" }.ToPrettyString(), Is.EqualTo("List<string>[2] {\n\t\"Hello\", \n\t\"World!\"\n}"));
 			Assert.That(new Dictionary<string, int> {
@@ -46,9 +50,12 @@ public class PrettyTests {
 	}
 
 	[Test]
-	public void NestedCollectionTest() {
+	public void NestedCollection() {
 		Assert.Multiple(() => {
 			Assert.That(new[,] { { 1, 2}, { 3, 4 }, { 5, 6 } }.ToPrettyString(), Is.EqualTo("int[3, 2] {\n\t{\n\t\t1, \n\t\t2\n\t}, \n\t{\n\t\t3, \n\t\t4\n\t}, \n\t{\n\t\t5, \n\t\t6\n\t}\n}"));
+			Assert.That(new int[0,0].ToPrettyString(), Is.EqualTo("int[0, 0] {\n\n}"));
+			Assert.That(new int[2,0].ToPrettyString(), Is.EqualTo("int[2, 0] {\n\t{ }, \n\t{ }\n}"));
+			Assert.That(new[,] { { 1 }, { 3 }, { 5 } }.ToPrettyString(), Is.EqualTo("int[3, 1] {\n\t{ 1 }, \n\t{ 3 }, \n\t{ 5 }\n}"));
 			Assert.That(new List<int[]> { new[] { 1, 2, 3 }, new[] { 4, 5, 6 } }.ToPrettyString(), Is.EqualTo(
 				"List<int[]>[2] {\n\tint[3] {\n\t\t1, \n\t\t2, \n\t\t3\n\t}, \n\tint[3] {\n\t\t4, \n\t\t5, \n\t\t6\n\t}\n}"));
 			Assert.That(new List<List<string>> { new() { "Hello", "World!" }, new() { "Zomg", "it" }, new() { "works" } }.ToPrettyString(), Is.EqualTo(
@@ -62,7 +69,7 @@ public class PrettyTests {
 	}
 
 	[Test]
-	public void NullTest() {
+	public void Null() {
 		Assert.Multiple(() => {
 			Assert.That(((string?) null).ToPrettyString(), Is.EqualTo("(string) null"));
 			Assert.That(((Dictionary<string, int>?) null).ToPrettyString(), Is.EqualTo("(Dictionary<string, int>) null"));
@@ -70,6 +77,26 @@ public class PrettyTests {
 				["Hello"] = 5,
 				["World"] = null,
 			}.ToPrettyString(), Is.EqualTo("Dictionary<string, int?>[2] {\n\t[\"Hello\"] = 5, \n\t[\"World\"] = null\n}"));
+		});
+	}
+	
+	class Foo0 { }
+
+	class Foo1 {
+		public int Test;
+	}
+
+	class Foo2 {
+		public int Bar;
+		public string Baz;
+	}
+	
+	[Test]
+	public void Object() {
+		Assert.Multiple(() => {
+			Assert.That(new Foo0().ToPrettyString(), Is.EqualTo("Tests.PrettyTests+Foo0 { }"));
+			Assert.That(new Foo1 { Test = 1337 }.ToPrettyString(), Is.EqualTo("Tests.PrettyTests+Foo1 { Test = 1337 }"));
+			Assert.That(new Foo2 { Bar = 7, Baz = "hax" }.ToPrettyString(), Is.EqualTo("Tests.PrettyTests+Foo2 {\n\tBar = 7, \n\tBaz = \"hax\"\n}"));
 		});
 	}
 }
