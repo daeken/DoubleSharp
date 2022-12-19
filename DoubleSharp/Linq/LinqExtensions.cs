@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using DoubleSharp.Random;
 
 namespace DoubleSharp.Linq; 
@@ -343,4 +344,41 @@ public static class LinqExtensions {
 	[Pure]
 	public static IEnumerable<T> Times<T>(this int count, Func<int, T> functor) =>
 		count.Range().Select(functor);
+
+    /// <summary>
+    /// Gets an array of <see cref="Type"/> objects representing the types of the tuple components.
+    /// </summary>
+    /// <param name="tuple">The tuple.</param>
+    /// <returns>An array of <see cref="Type"/> objects representing the types of the tuple components.</returns>
+    public static Type[] GetComponentTypes(this ITuple tuple)
+    {
+        return tuple.GetType().GetGenericArguments();
+    }
+
+    /// <summary>
+    /// Enumerates the components of a tuple where the component type is compatible with <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of components to enumerate.</typeparam>
+    /// <param name="tuple">The tuple to enumerate.</param>
+    /// <returns>
+    /// <para>An <see cref="IEnumerable{T}"/> containing all components from the tuple whose type was compatible with <typeparamref name="T"/>.</para>
+    /// <para>If <paramref name="tuple"/> is null, no elements are returned.</para>
+    /// </returns>
+    public static IEnumerable<T> EnumerateComponents<T>(this ITuple? tuple)
+    {
+        if (tuple == null)
+            yield break;
+        Type[] t = tuple.GetComponentTypes();
+        for (int n = 0; n < tuple.Length; n++)
+            if (t[n].IsAssignableTo(typeof(T)))
+                yield return (T)tuple[n]!;
+    }
+
+    /// <summary>
+    /// Enumerates the components of a tuple.
+    /// </summary>
+    /// <param name="tuple"></param>
+    /// <returns></returns>
+    public static IEnumerable<object?> EnumerateComponents(this ITuple tuple)
+        => EnumerateComponents<object>(tuple);
 }
