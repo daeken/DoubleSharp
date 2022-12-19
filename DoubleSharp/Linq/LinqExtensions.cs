@@ -382,8 +382,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -391,8 +392,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -401,8 +403,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -412,8 +415,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -424,8 +428,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -437,8 +442,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -451,8 +457,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -466,8 +473,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -482,8 +490,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -499,8 +508,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -517,8 +527,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -536,8 +547,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -556,8 +568,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -577,8 +590,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -599,8 +613,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14, T _15) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -622,8 +637,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14, T _15, T _16) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -646,8 +662,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14, T _15, T _16, T _17) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -671,8 +688,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14, T _15, T _16, T _17, T _18) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
@@ -697,8 +715,9 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.
 	/// </summary>
+	/// <typeparam name="T">The type of each element of the <paramref name="tuple"/>.</typeparam>
 	/// <param name="tuple"></param>
-	/// <returns></returns>
+	/// <returns>An enumerable sequence of the tuple values</returns>
 	public static IEnumerable<T> AsEnumerable<T>(this (T _0, T _1, T _2, T _3, T _4, T _5, T _6, T _7, T _8, T _9, T _10, T _11, T _12, T _13, T _14, T _15, T _16, T _17, T _18, T _19) tuple) {
 		yield return tuple._0;
 		yield return tuple._1;
