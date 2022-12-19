@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace DoubleSharp.Pretty;
@@ -20,12 +21,14 @@ public static class PrettyExtensions {
 		}
 		Printers = printers;
 	}
-		
+	
+	[ExcludeFromCodeCoverage]
 	public static T Print<T>(this T obj) {
 		Console.WriteLine(obj.ToPrettyString());
 		return obj;
 	}
 
+	[ExcludeFromCodeCoverage]
 	public static T PrettyPrint<T>(this T obj) {
 		Console.WriteLine(obj.ToPrettyString());
 		return obj;

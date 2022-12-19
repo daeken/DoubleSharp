@@ -1,8 +1,11 @@
-﻿namespace DoubleSharp.Progress;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DoubleSharp.Progress;
 
 using System.Diagnostics;
 
 /// <summary>DoubleSharp progress bar extensions.</summary>
+[ExcludeFromCodeCoverage]
 public static class ProgressExtensions {
 
     /// <summary>
