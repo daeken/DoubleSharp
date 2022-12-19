@@ -21,8 +21,16 @@ public static class PrettyExtensions {
 		Printers = printers;
 	}
 		
-	public static void Print<T>(this T obj) => Console.WriteLine(obj.ToPrettyString());
-	public static void PrettyPrint<T>(this T obj) => Console.WriteLine(obj.ToPrettyString());
+	public static T Print<T>(this T obj) {
+		Console.WriteLine(obj.ToPrettyString());
+		return obj;
+	}
+
+	public static T PrettyPrint<T>(this T obj) {
+		Console.WriteLine(obj.ToPrettyString());
+		return obj;
+	}
+
 	public static string ToPrettyString<T>(this T obj) => obj == null
 		? $"({typeof(T).ToPrettyString()}) null"
 		: ToPrettyString((object) obj);

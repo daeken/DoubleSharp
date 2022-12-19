@@ -1,4 +1,12 @@
-﻿using DoubleSharp.Progress;
+﻿using DoubleSharp.Pretty;
+using DoubleSharp.Progress;
+
+new[,] { { 1, 2}, { 3, 4 }, { 5, 6 } }.Print();
+new List<int[]> { new[] { 1, 2, 3 }, new[] { 4, 5, 6 } }.Print();
+new Dictionary<string, List<int>> {
+	["Hello"] = new() { 1, 2 },
+	["World!"] = new(),
+}.PrettyPrint();
 
 var sum = Enumerable.Range(0, 1000).ToList().WithProgress().Select(x => {
 	Thread.Sleep(3);
