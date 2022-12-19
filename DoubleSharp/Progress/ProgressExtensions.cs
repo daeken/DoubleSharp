@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿namespace DoubleSharp.Progress;
 
-namespace DoubleSharp.Progress;
+using System.Diagnostics;
 
 /// <summary>DoubleSharp progress bar extensions.</summary>
 public static class ProgressExtensions {
