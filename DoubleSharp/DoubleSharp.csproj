@@ -11,6 +11,11 @@
         <Copyright>Copyright (c) 2022 Sera Brocious</Copyright>
         <Description>DoubleSharp provides convenience features for LINQ, concurrency, randomness, progress bars, and more.</Description>
         <RepositoryUrl>https://github.com/daeken/DoubleSharp</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 </Project>
