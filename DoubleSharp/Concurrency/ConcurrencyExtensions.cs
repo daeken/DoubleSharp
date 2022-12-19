@@ -5,7 +5,7 @@ namespace DoubleSharp.Concurrency;
 public static class ConcurrencyExtensions {
 
 	/// <summary>
-	/// Locks the target object and performs the specified action on it.
+	/// Locks the target object and performs the specified action.
 	/// </summary>
 	/// <typeparam name="T">The type of the object.</typeparam>
 	/// <param name="object">The object.</param>
@@ -24,7 +24,7 @@ public static class ConcurrencyExtensions {
 	/// </summary>
 	/// <typeparam name="T">The type of the object.</typeparam>
 	/// <param name="object">The object.</param>
-	/// <param name="action">The <see cref="Action{T}"/> delegate to perform.</param>
+	/// <param name="action">The <see cref="Action{T}"/> delegate to perform on the object.</param>
 	/// <returns>The object.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="object"/> is null.</exception>
 	public static T Locked<T>(this T @object, Action<T> action) {
