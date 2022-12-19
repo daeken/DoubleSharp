@@ -34,7 +34,12 @@ public static class Rng {
 	/// includes 0 but not <paramref name="maxValue"/>. However, if <paramref name="maxValue"/> equals 0, <paramref name="maxValue"/> is returned.
 	/// </returns>
 	/// <exception cref="ArgumentOutOfRangeException"><paramref name="maxValue"/> is less than 0.</exception>
-	public static int Next(int maxValue) => Random.Next(maxValue);
+	public static int Next(int maxValue) {
+		if(maxValue < 0)
+			throw new ArgumentOutOfRangeException(nameof(maxValue), 
+				"`maxValue' must not be negative.");
+		return Random.Next(maxValue);
+	}
 
 	/// <summary>Returns a random integer that is within a specified range, from the thread-local random number generator.</summary>
 	/// <param name="minValue">The inclusive lower bound of the random number returned.</param>
@@ -44,7 +49,12 @@ public static class Rng {
 	/// but not <paramref name="maxValue"/>. If minValue equals <paramref name="maxValue"/>, <paramref name="minValue"/> is returned.
 	/// </returns>
 	/// <exception cref="ArgumentOutOfRangeException"><paramref name="minValue"/> is greater than <paramref name="maxValue"/>.</exception>
-	public static int Next(int minValue, int maxValue) => Random.Next(minValue, maxValue);
+	public static int Next(int minValue, int maxValue) {
+		if(minValue > maxValue)
+			throw new ArgumentOutOfRangeException(nameof(minValue), 
+				"'minValue' cannot be greater than maxValue.");
+		return Random.Next(minValue, maxValue);
+	}
 
 	/// <summary>Returns a non-negative random integer from the thread-local random number generator.</summary>
 	/// <returns>A 64-bit signed integer that is greater than or equal to 0 and less than <see cref="long.MaxValue"/>.</returns>
@@ -57,7 +67,12 @@ public static class Rng {
 	/// includes 0 but not <paramref name="maxValue"/>. However, if <paramref name="maxValue"/> equals 0, <paramref name="maxValue"/> is returned.
 	/// </returns>
 	/// <exception cref="ArgumentOutOfRangeException"><paramref name="maxValue"/> is less than 0.</exception>
-	public static long NextInt64(int maxValue) => Random.NextInt64(maxValue);
+	public static long NextInt64(long maxValue) {
+		if(maxValue < 0L)
+			throw new ArgumentOutOfRangeException(nameof(maxValue), 
+				"`maxValue' must not be negative.");
+		return Random.NextInt64(maxValue);
+	}
 
 	/// <summary>Returns a random integer that is within a specified range, from the thread-local random number generator.</summary>
 	/// <param name="minValue">The inclusive lower bound of the random number returned.</param>
@@ -67,12 +82,20 @@ public static class Rng {
 	/// but not <paramref name="maxValue"/>. If minValue equals <paramref name="maxValue"/>, <paramref name="minValue"/> is returned.
 	/// </returns>
 	/// <exception cref="ArgumentOutOfRangeException"><paramref name="minValue"/> is greater than <paramref name="maxValue"/>.</exception>
-	public static long NextInt64(int minValue, int maxValue) => Random.NextInt64(minValue, maxValue);
+	public static long NextInt64(int minValue, int maxValue) {
+		if(minValue > maxValue)
+			throw new ArgumentOutOfRangeException(nameof(minValue), 
+				"'minValue' cannot be greater than maxValue.");
+		return Random.NextInt64(minValue, maxValue);
+	}
 
 	/// <summary>Fills the elements of a specified array of bytes with random numbers, using the thread-local random number generator.</summary>
 	/// <param name="buffer">The array to be filled with random numbers.</param>
 	/// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-	public static void NextBytes(byte[] buffer) => Random.NextBytes(buffer);
+	public static void NextBytes(byte[] buffer) {
+		if(buffer == null) throw new ArgumentNullException(nameof(buffer));
+		Random.NextBytes(buffer);
+	}
 
 	/// <summary>Fills the elements of a specified span of bytes with random numbers, using the thread-local random number generator.</summary>
 	/// <param name="buffer">The array to be filled with random numbers.</param>
