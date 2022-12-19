@@ -1,5 +1,6 @@
-namespace DoubleSharp.Functional; 
+namespace DoubleSharp.Functional;
 
+/// <summary>DoubleSharp functional extensions.</summary>
 public static class FunctionalExtensions {
 
 	/// <summary>

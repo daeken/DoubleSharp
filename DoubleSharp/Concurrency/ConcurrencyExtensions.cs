@@ -1,7 +1,8 @@
 using System.Runtime.CompilerServices;
 
-namespace DoubleSharp.Concurrency; 
+namespace DoubleSharp.Concurrency;
 
+/// <summary>DoubleSharp concurrency extensions.</summary>
 public static class ConcurrencyExtensions {
 
 	/// <summary>
