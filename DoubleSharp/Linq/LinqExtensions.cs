@@ -1,3 +1,4 @@
+using System.Diagnostics.Contracts;
 using DoubleSharp.Random;
 
 namespace DoubleSharp.Linq; 
@@ -314,4 +315,32 @@ public static class LinqExtensions {
 	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/></remarks>
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) =>
 		IndexOfMinBy<TSource, TKey>(source, keySelector, comparer);
+	
+	public static IEnumerable<int> Range(this int end) =>
+		Enumerable.Range(0, end);
+	public static IEnumerable<int> Range(this (int Start, int End) range) =>
+		Enumerable.Range(range.Start, range.End - range.Start);
+	public static IEnumerable<int> Range(this (int Start, int End, int Step) range) {
+		for(var i = range.Start; i < range.End; i += range.Step)
+			yield return i;
+	}
+
+	public static void Times(this int count, Action functor) {
+		for(var i = 0; i < count; ++i)
+			functor();
+	}
+	public static void Times(this int count, Action<int> functor) {
+		for(var i = 0; i < count; ++i)
+			functor(i);
+	}
+
+	// If you accidentally make your functor return a value when you wanted to
+	// use the above Action instances instead, the Pure attribute throws a warning.
+	// Basically, it adds a small safety to the footgun.
+	[Pure]
+	public static IEnumerable<T> Times<T>(this int count, Func<T> functor) =>
+		count.Range().Select(_ => functor());
+	[Pure]
+	public static IEnumerable<T> Times<T>(this int count, Func<int, T> functor) =>
+		count.Range().Select(functor);
 }

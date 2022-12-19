@@ -123,4 +123,28 @@ public class LinqTests {
 			Assert.That(new[] { (0, false), (0, false), (1, false) }.ArgMax(x => x.Item1), Is.EqualTo(2));
 		});
 	}
+
+	[Test]
+	public void Range() {
+		Assert.Multiple(() => {
+			Assert.That(5.Range().ToArray(), Is.EquivalentTo(new[] { 0, 1, 2, 3, 4 }));
+			Assert.That((3, 6).Range().ToArray(), Is.EquivalentTo(new[] { 3, 4, 5 }));
+			Assert.That((0, 16, 5).Range().ToArray(), Is.EquivalentTo(new[] { 0, 5, 10, 15 }));
+		});
+	}
+
+	[Test]
+	public void Times() {
+		Assert.Multiple(() => {
+			var count = 0;
+			1000.Times(() => { count++; });
+			Assert.That(count, Is.EqualTo(1000));
+			var sum = 0;
+			1000.Times(i => { sum += i; });
+			Assert.That(sum, Is.EqualTo(499500));
+			
+			Assert.That(1000.Times(() => 1).Sum(), Is.EqualTo(1000));
+			Assert.That(1000.Times(i => i).Sum(), Is.EqualTo(499500));
+		});
+	}
 }
