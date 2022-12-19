@@ -17,4 +17,24 @@ public static class MathExtensions {
 	public static double Ceil(this double x) => Math.Ceiling(x);
 	public static int CeilInt(this float x) => (int) MathF.Ceiling(x);
 	public static int CeilInt(this double x) => (int) Math.Ceiling(x);
+	
+	public static bool HasBit(this byte v, int bit) => (v & (1U << bit)) != 0;
+	public static bool HasBit(this ushort v, int bit) => (v & (1U << bit)) != 0;
+	public static bool HasBit(this uint v, int bit) => (v & (1U << bit)) != 0;
+	public static bool HasBit(this ulong v, int bit) => (v & (1UL << bit)) != 0;
+	
+	public static byte WithBit(this byte v, int bit) => (byte) (v | (1U << bit));
+	public static ushort WithBit(this ushort v, int bit) => (ushort) (v | (1U << bit));
+	public static uint WithBit(this uint v, int bit) => v | (1U << bit);
+	public static ulong WithBit(this ulong v, int bit) => v | (1UL << bit);
+
+	public static byte WithoutBit(this byte v, int bit) => (byte) (v & ~(1U << bit));
+	public static ushort WithoutBit(this ushort v, int bit) => (ushort) (v & ~(1U << bit));
+	public static uint WithoutBit(this uint v, int bit) => v & ~(1U << bit);
+	public static ulong WithoutBit(this ulong v, int bit) => v & ~(1UL << bit);
+
+	public static byte SetBit(this byte v, int bit, bool cond) => cond ? (byte) (v | (1U << bit)) : v;
+	public static ushort SetBit(this ushort v, int bit, bool cond) => cond ? (ushort) (v | (1U << bit)) : v;
+	public static uint SetBit(this uint v, int bit, bool cond) => cond ? v | (1U << bit) : v;
+	public static ulong SetBit(this ulong v, int bit, bool cond) => cond ? v | (1UL << bit) : v;
 }
