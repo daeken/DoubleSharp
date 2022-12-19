@@ -11,6 +11,8 @@ public static class MathExtensions {
 	public static int FloorInt(this float x) => (int) MathF.Floor(x);
 	public static int FloorInt(this double x) => (int) Math.Floor(x);
 
+	// I know C# uses Ceiling. Every other language in the world uses ceil.
+	// We don't need to be burdened by MS's poor life choices.
 	public static float Ceil(this float x) => MathF.Ceiling(x);
 	public static double Ceil(this double x) => Math.Ceiling(x);
 	public static int CeilInt(this float x) => (int) MathF.Ceiling(x);
