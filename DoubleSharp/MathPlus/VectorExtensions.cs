@@ -65,6 +65,7 @@ public static class VectorExtensions {
 			acc += point;
 			count++;
 		}
+		if(count == 0) return Vector2.Zero;
 		return acc / count;
 	}
 	public static Vector3 Centroid(this IEnumerable<Vector3> source) {
@@ -74,6 +75,7 @@ public static class VectorExtensions {
 			acc += point;
 			count++;
 		}
+		if(count == 0) return Vector3.Zero;
 		return acc / count;
 	}
 	public static Vector4 Centroid(this IEnumerable<Vector4> source) {
@@ -83,6 +85,7 @@ public static class VectorExtensions {
 			acc += point;
 			count++;
 		}
+		if(count == 0) return Vector4.Zero;
 		return acc / count;
 	}
 }
