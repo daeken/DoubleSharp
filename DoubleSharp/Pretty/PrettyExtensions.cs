@@ -42,6 +42,10 @@ public static class PrettyExtensions {
 		var type = obj.GetType();
 		if(obj is Type) type = typeof(Type);
 		if(!Printers.ContainsKey(type)) {
+			if(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)) {
+				dynamic dobj = obj;
+				return $"[{((object) dobj.Key).ToPrettyString()}] = {((object) dobj.Value).ToPrettyString()}";
+			}
 			if(!type.GetInterfaces().Contains(typeof(IEnumerable))) return GenericPretty(obj);
 			var temp = Enumeratorable(((IEnumerable) obj).GetEnumerator()).ToList();
 			var prefix = $"{ToPrettyString(type.IsArray ? type.GetElementType() : type)}[{temp.Count}]";
