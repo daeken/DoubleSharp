@@ -52,18 +52,17 @@ public static class PrettyExtensions {
 		if(!Printers.ContainsKey(type)) {
 			if(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)) {
 				dynamic dobj = obj;
-				return $"[{((object) dobj.Key).ToPrettyString()}] = {((object) dobj.Value).ToPrettyString()}";
+				return $"[{ToPrettyString((object) dobj.Key)}] = {ToPrettyString((object) dobj.Value)}";
 			}
 			if(type.IsArray && type.GetArrayRank() != 1) return RecurseArray((Array) obj, new());
 			if(!type.GetInterfaces().Contains(typeof(IEnumerable))) return GenericPretty(obj);
 			var temp = Enumeratorable(((IEnumerable) obj).GetEnumerator()).ToList();
 			var prefix = $"{ToPrettyString(type.IsArray ? type.GetElementType() : type)}[{temp.Count}]";
-			switch(temp.Count) {
-				case 0: return prefix;
-				case 1: return prefix + $" {{ {ToPrettyString(temp[0])} }}";
-				default:
-					return prefix + " {\n" + string.Join(", \n", temp.Select(x => Indentify(ToPrettyString(x)))) + "\n}";
-			}
+			return temp.Count switch {
+				0 => prefix,
+				1 => prefix + $" {{ {ToPrettyString(temp[0])} }}",
+				_ => prefix + " {\n" + string.Join(", \n", temp.Select(x => Indentify(ToPrettyString(x)))) + "\n}"
+			};
 		}
 
 		var printer = Printers[type];
@@ -144,10 +143,12 @@ public static class PrettyExtensions {
 
 	[PrettyPrinter]
 	// ReSharper disable once UnusedMember.Local
-	static string PrettyPrintThis(Type type) => 
-		type.IsGenericType
-			? $"{RenameType(type.FullName!.Split('`')[0])}<{string.Join(", ", type.GetGenericArguments().Select(PrettyPrintThis))}>"
-			: type.IsArray
-				? $"{PrettyPrintThis(type.GetElementType()!)}[{new(',', type.GetArrayRank() - 1)}]"
-				: RenameType(type.ToString());
+	static string PrettyPrintThis(Type type) =>
+		type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+			? $"{PrettyPrintThis(type.GetGenericArguments()[0])}?"
+			: type.IsGenericType
+				? $"{RenameType(type.FullName!.Split('`')[0])}<{string.Join(", ", type.GetGenericArguments().Select(PrettyPrintThis))}>"
+				: type.IsArray
+					? $"{PrettyPrintThis(type.GetElementType()!)}[{new(',', type.GetArrayRank() - 1)}]"
+					: RenameType(type.ToString());
 }

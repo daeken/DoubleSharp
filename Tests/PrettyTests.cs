@@ -60,4 +60,16 @@ public class PrettyTests {
 				"Dictionary<string, List<int>>[2] {\n\t[\"Hello\"] = List<int>[2] {\n\t\t1, \n\t\t2\n\t}, \n\t[\"World!\"] = List<int>[0]\n}"));
 		});
 	}
+
+	[Test]
+	public void NullTest() {
+		Assert.Multiple(() => {
+			Assert.That(((string?) null).ToPrettyString(), Is.EqualTo("(string) null"));
+			Assert.That(((Dictionary<string, int>?) null).ToPrettyString(), Is.EqualTo("(Dictionary<string, int>) null"));
+			Assert.That(new Dictionary<string, int?> {
+				["Hello"] = 5,
+				["World"] = null,
+			}.ToPrettyString(), Is.EqualTo("Dictionary<string, int?>[2] {\n\t[\"Hello\"] = 5, \n\t[\"World\"] = null\n}"));
+		});
+	}
 }
