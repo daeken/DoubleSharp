@@ -85,6 +85,24 @@ public class VectorTests {
 	}
 	
 	[Test]
+	public void DistanceTo() {
+		Assert.Multiple(() => {
+			Assert.That(Vector2.Zero.DistanceTo(new(2f, 0f)), Is.EqualTo(2f));
+			Assert.That(Vector3.Zero.DistanceTo(new(2f, 0f, 0f)), Is.EqualTo(2f));
+			Assert.That(Vector4.Zero.DistanceTo(new(2f, 0f, 0f, 0f)), Is.EqualTo(2f));
+		});
+	}
+	
+	[Test]
+	public void SquaredDistanceTo() {
+		Assert.Multiple(() => {
+			Assert.That(Vector2.Zero.SquaredDistanceTo(new(2f, 0f)), Is.EqualTo(4f));
+			Assert.That(Vector3.Zero.SquaredDistanceTo(new(2f, 0f, 0f)), Is.EqualTo(4f));
+			Assert.That(Vector4.Zero.SquaredDistanceTo(new(2f, 0f, 0f, 0f)), Is.EqualTo(4f));
+		});
+	}
+	
+	[Test]
 	public void Min() {
 		Assert.Multiple(() => {
 			Assert.That(new Vector2(0f, 5f).Min(new(6f, 1f)), Is.EqualTo(new Vector2(0f, 1f)));

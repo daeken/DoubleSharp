@@ -41,6 +41,14 @@ public static class VectorExtensions {
 
 	public static float Cross(this Vector2 a, Vector2 b) => a.X * b.Y - a.Y * b.X;
 
+	public static float DistanceTo(this Vector2 a, Vector2 b) => Vector2.Distance(a, b);
+	public static float DistanceTo(this Vector3 a, Vector3 b) => Vector3.Distance(a, b);
+	public static float DistanceTo(this Vector4 a, Vector4 b) => Vector4.Distance(a, b);
+
+	public static float SquaredDistanceTo(this Vector2 a, Vector2 b) => Vector2.DistanceSquared(a, b);
+	public static float SquaredDistanceTo(this Vector3 a, Vector3 b) => Vector3.DistanceSquared(a, b);
+	public static float SquaredDistanceTo(this Vector4 a, Vector4 b) => Vector4.DistanceSquared(a, b);
+
 	public static Vector2 Min(this Vector2 a, Vector2 b) => Vector2.Min(a, b);
 	public static Vector3 Min(this Vector3 a, Vector3 b) => Vector3.Min(a, b);
 	public static Vector4 Min(this Vector4 a, Vector4 b) => Vector4.Min(a, b);
