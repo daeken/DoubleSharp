@@ -1,5 +1,4 @@
 using DoubleSharp.Functional;
-using NUnit.Framework;
 
 namespace Tests; 
 

@@ -1,5 +1,4 @@
 using DoubleSharp.Pretty;
-using NUnit.Framework;
 
 namespace Tests; 
 
