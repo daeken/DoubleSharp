@@ -46,6 +46,7 @@ public static class PrettyExtensions {
 				dynamic dobj = obj;
 				return $"[{((object) dobj.Key).ToPrettyString()}] = {((object) dobj.Value).ToPrettyString()}";
 			}
+			if(type.IsArray && type.GetArrayRank() != 1) return RecurseArray((Array) obj, new());
 			if(!type.GetInterfaces().Contains(typeof(IEnumerable))) return GenericPretty(obj);
 			var temp = Enumeratorable(((IEnumerable) obj).GetEnumerator()).ToList();
 			var prefix = $"{ToPrettyString(type.IsArray ? type.GetElementType() : type)}[{temp.Count}]";
@@ -61,6 +62,24 @@ public static class PrettyExtensions {
 		return printer.IsStatic
 			? (string) printer.Invoke(null, new[] { obj })!
 			: (string) printer.Invoke(obj, null)!;
+	}
+
+	static string RecurseArray(Array arr, List<int> keys) {
+		var rank = keys.Count;
+		var lastRank = arr.Rank - 1 == rank;
+		var count = arr.GetLength(rank);
+		string body;
+		
+		if(lastRank) {
+			body = count switch {
+				0 => "{ }",
+				1 => $"{{ {arr.GetValue(keys.Concat(new[] { 0 }).ToArray())} }}", 
+				_ => $"{{\n{string.Join(", \n", Enumerable.Range(0, count).Select(i => Indentify(arr.GetValue(keys.Concat(new[] { i }).ToArray()).ToPrettyString())))}\n}}"
+			};
+		} else
+			body = $"{{\n{string.Join(", \n", Enumerable.Range(0, count).Select(i => Indentify(RecurseArray(arr, keys.Concat(new[] { i }).ToList()))))}\n}}";
+		if(rank != 0) return body;
+		return $"{arr.GetType().GetElementType().ToPrettyString()}[{string.Join(", ", Enumerable.Range(0, arr.Rank).Select(arr.GetLength))}] {body}";
 	}
 
 	static string GenericPretty(object obj) {

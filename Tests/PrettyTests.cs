@@ -49,7 +49,7 @@ public class PrettyTests {
 	[Test]
 	public void NestedCollectionTest() {
 		Assert.Multiple(() => {
-			//Assert.That(new[,] { { 1, 2}, { 3, 4 } }.ToPrettyString(), Is.EqualTo("int[6] {\n\t1, \n\t2, \n\t3, \n\t4, \n\t5, \n\t6\n}"));
+			Assert.That(new[,] { { 1, 2}, { 3, 4 }, { 5, 6 } }.ToPrettyString(), Is.EqualTo("int[3, 2] {\n\t{\n\t\t1, \n\t\t2\n\t}, \n\t{\n\t\t3, \n\t\t4\n\t}, \n\t{\n\t\t5, \n\t\t6\n\t}\n}"));
 			Assert.That(new List<int[]> { new[] { 1, 2, 3 }, new[] { 4, 5, 6 } }.ToPrettyString(), Is.EqualTo(
 				"List<int[]>[2] {\n\tint[3] {\n\t\t1, \n\t\t2, \n\t\t3\n\t}, \n\tint[3] {\n\t\t4, \n\t\t5, \n\t\t6\n\t}\n}"));
 			Assert.That(new List<List<string>> { new() { "Hello", "World!" }, new() { "Zomg", "it" }, new() { "works" } }.ToPrettyString(), Is.EqualTo(
