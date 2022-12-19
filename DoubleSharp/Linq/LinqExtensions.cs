@@ -327,6 +327,13 @@ public static class LinqExtensions {
 		return (a + b) / T.CreateChecked(2);
 	}
 	
+	// WARNING: This will always return the lower end of the median if it's an even-lengthed sequence
+	public static TValue MedianBy<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> by) {
+		var sorted = source.OrderBy(by).ToList();
+		var midpoint = sorted.Count / 2;
+		return sorted[midpoint];
+	}
+	
 	public static IEnumerable<int> Range(this int end) =>
 		Enumerable.Range(0, end);
 	public static IEnumerable<int> Range(this (int Start, int End) range) =>
