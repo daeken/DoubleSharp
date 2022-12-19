@@ -125,6 +125,23 @@ public class LinqTests {
 	}
 
 	[Test]
+	public void Median() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { 3, 1, 2 }.Median(), Is.EqualTo(2));
+			Assert.That(new[] { 3, 1, 4, 2 }.Median(), Is.EqualTo(2));
+			Assert.That(new[] { 4, 1, 5, 2 }.Median(), Is.EqualTo(3));
+			
+			Assert.That(new[] { 3f, 1, 2 }.Median(), Is.EqualTo(2f));
+			Assert.That(new[] { 3f, 1, 4, 2 }.Median(), Is.EqualTo(2.5f));
+			Assert.That(new[] { 4f, 1, 5, 2 }.Median(), Is.EqualTo(3f));
+			
+			Assert.That(new[] { 3.0, 1, 2 }.Median(), Is.EqualTo(2.0));
+			Assert.That(new[] { 3.0, 1, 4, 2 }.Median(), Is.EqualTo(2.5));
+			Assert.That(new[] { 4.0, 1, 5, 2 }.Median(), Is.EqualTo(3.0));
+		});
+	}
+
+	[Test]
 	public void Range() {
 		Assert.Multiple(() => {
 			Assert.That(5.Range().ToArray(), Is.EquivalentTo(new[] { 0, 1, 2, 3, 4 }));
