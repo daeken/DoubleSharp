@@ -350,10 +350,8 @@ public static class LinqExtensions {
     /// </summary>
     /// <param name="tuple">The tuple.</param>
     /// <returns>An array of <see cref="Type"/> objects representing the types of the tuple components.</returns>
-    public static Type[] GetComponentTypes(this ITuple tuple)
-    {
-        return tuple.GetType().GetGenericArguments();
-    }
+    public static Type[] GetComponentTypes(this ITuple tuple) =>
+	    tuple.GetType().GetGenericArguments();
 
     /// <summary>
     /// Enumerates the components of a tuple where the component type is compatible with <typeparamref name="T"/>.
@@ -364,14 +362,13 @@ public static class LinqExtensions {
     /// <para>An <see cref="IEnumerable{T}"/> containing all components from the tuple whose type was compatible with <typeparamref name="T"/>.</para>
     /// <para>If <paramref name="tuple"/> is null, no elements are returned.</para>
     /// </returns>
-    public static IEnumerable<T> EnumerateComponents<T>(this ITuple? tuple)
-    {
-        if (tuple == null)
+    public static IEnumerable<T> EnumerateComponents<T>(this ITuple? tuple) {
+        if(tuple == null)
             yield break;
-        Type[] t = tuple.GetComponentTypes();
-        for (int n = 0; n < tuple.Length; n++)
-            if (t[n].IsAssignableTo(typeof(T)))
-                yield return (T)tuple[n]!;
+        var t = tuple.GetComponentTypes();
+        for(var n = 0; n < tuple.Length; n++)
+            if(t[n].IsAssignableTo(typeof(T)))
+                yield return (T) tuple[n]!;
     }
 
     /// <summary>
@@ -379,6 +376,6 @@ public static class LinqExtensions {
     /// </summary>
     /// <param name="tuple"></param>
     /// <returns></returns>
-    public static IEnumerable<object?> EnumerateComponents(this ITuple tuple)
-        => EnumerateComponents<object>(tuple);
+    public static IEnumerable<object?> EnumerateComponents(this ITuple tuple) =>
+	    EnumerateComponents<object>(tuple);
 }
