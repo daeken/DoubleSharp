@@ -1,6 +1,7 @@
 using System.Diagnostics.Contracts;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using DoubleSharp.Pretty;
 using DoubleSharp.Random;
 
 namespace DoubleSharp.Linq; 
@@ -322,6 +323,7 @@ public static class LinqExtensions {
 
 	public static T Median<T>(this IEnumerable<T> source) where T : INumber<T> {
 		var sorted = source.Order().ToList();
+		if(sorted.Count == 0) throw new InvalidOperationException("Sequence contains no elements");
 		var midpoint = sorted.Count / 2;
 		if(sorted.Count % 2 != 0) return sorted[midpoint];
 		var a = sorted[midpoint - 1];
@@ -332,8 +334,12 @@ public static class LinqExtensions {
 	// WARNING: This will always return the lower end of the median if it's an even-lengthed sequence
 	public static TValue MedianBy<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> by) {
 		var sorted = source.OrderBy(by).ToList();
-		var midpoint = sorted.Count / 2;
-		return sorted[midpoint];
+		return sorted.Count switch {
+			0 => throw new InvalidOperationException("Sequence contains no elements"),
+			1 => sorted[0],
+			_ when sorted.Count % 2 == 1 => sorted[sorted.Count / 2],
+			_ => sorted[sorted.Count / 2 - 1]
+		};
 	}
 	
 	public static IEnumerable<int> Range(this int end) =>

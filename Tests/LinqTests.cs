@@ -150,8 +150,52 @@ public class LinqTests {
 	}
 
 	[Test]
+	public void ArgMaxComparer() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { 1, 0, 0 }.ArgMax(Comparer<int>.Default), Is.EqualTo(0));
+			Assert.That(new[] { 0, 1, 0 }.ArgMax(Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { 0, 1, 1 }.ArgMax(Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { 0, 0, 1 }.ArgMax(Comparer<int>.Default), Is.EqualTo(2));
+		});
+	}
+
+	[Test]
+	public void ArgMinComparer() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { 1, 0, 0 }.ArgMin(Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { 0, 1, 0 }.ArgMin(Comparer<int>.Default), Is.EqualTo(0));
+			Assert.That(new[] { 1, 1, 0 }.ArgMin(Comparer<int>.Default), Is.EqualTo(2));
+			Assert.That(new[] { 0, 1, 1 }.ArgMin(Comparer<int>.Default), Is.EqualTo(0));
+		});
+	}
+
+	[Test]
+	public void ArgMaxByComparer() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { (1, false), (0, false), (0, false) }.ArgMax(x => x.Item1, Comparer<int>.Default), Is.EqualTo(0));
+			Assert.That(new[] { (0, false), (1, false), (0, false) }.ArgMax(x => x.Item1, Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (1, false), (1, false) }.ArgMax(x => x.Item1, Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (0, false), (1, false) }.ArgMax(x => x.Item1, Comparer<int>.Default), Is.EqualTo(2));
+		});
+	}
+
+	[Test]
+	public void ArgMinByComparer() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { (1, false), (0, false), (0, false) }.ArgMin(x => x.Item1, Comparer<int>.Default), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (1, false), (0, false) }.ArgMin(x => x.Item1, Comparer<int>.Default), Is.EqualTo(0));
+			Assert.That(new[] { (1, false), (1, false), (0, false) }.ArgMin(x => x.Item1, Comparer<int>.Default), Is.EqualTo(2));
+			Assert.That(new[] { (0, false), (1, false), (1, false) }.ArgMin(x => x.Item1, Comparer<int>.Default), Is.EqualTo(0));
+		});
+	}
+
+	[Test]
 	public void Median() {
 		Assert.Multiple(() => {
+			Assert.That(() => Enumerable.Empty<int>().Median(), Throws.InvalidOperationException);
+
+			Assert.That(new[] { 3 }.Median(), Is.EqualTo(3));
+
 			Assert.That(new[] { 3, 1, 2 }.Median(), Is.EqualTo(2));
 			Assert.That(new[] { 3, 1, 4, 2 }.Median(), Is.EqualTo(2));
 			Assert.That(new[] { 4, 1, 5, 2 }.Median(), Is.EqualTo(3));
@@ -163,6 +207,16 @@ public class LinqTests {
 			Assert.That(new[] { 3.0, 1, 2 }.Median(), Is.EqualTo(2.0));
 			Assert.That(new[] { 3.0, 1, 4, 2 }.Median(), Is.EqualTo(2.5));
 			Assert.That(new[] { 4.0, 1, 5, 2 }.Median(), Is.EqualTo(3.0));
+		});
+	}
+
+	[Test]
+	public void MedianBy() {
+		Assert.Multiple(() => {
+			Assert.That(() => Enumerable.Empty<int>().MedianBy(x => x), Throws.InvalidOperationException);
+			Assert.That(new[] { (3, false) }.MedianBy(x => x.Item1), Is.EqualTo((3, false)));
+			Assert.That(new[] { (3, false), (1, false), (2, false) }.MedianBy(x => x.Item1), Is.EqualTo((2, false)));
+			Assert.That(new[] { (70, false), (1, false), (40, false), (2, false) }.MedianBy(x => x.Item1), Is.EqualTo((2, false)));
 		});
 	}
 
@@ -217,14 +271,21 @@ public class LinqTests {
 	[Test]
 	// TODO: Figure out a better test
 	public void Shuffle() {
-		var list = 1000.Range().ToList();
-		list.Shuffle();
-		Assert.That(list, Is.Not.EqualTo(1000.Range()));
+		Assert.Multiple(() => {
+			Assert.That(() => ((List<int>) null)!.Shuffle(), Throws.ArgumentNullException);
+			var list = 1000.Range().ToList();
+			list.Shuffle();
+			Assert.That(list, Is.Not.EqualTo(1000.Range()));
+			Assert.That(() => new List<int>().Shuffle(), Throws.Nothing);
+		});
 	}
 
 	[Test]
 	// TODO: Figure out a better test
 	public void Shuffled() {
-		Assert.That(1000.Range().Shuffled(), Is.Not.EqualTo(1000.Range()));
+		Assert.Multiple(() => {
+			Assert.That(() => ((IEnumerable<int>) null)!.Shuffled(), Throws.ArgumentNullException);
+			Assert.That(1000.Range().Shuffled(), Is.Not.EqualTo(1000.Range()));
+		});
 	}
 }
