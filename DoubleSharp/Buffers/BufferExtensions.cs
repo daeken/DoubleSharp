@@ -57,7 +57,6 @@ public static class BufferExtensions {
 	static IEnumerable<T> RefEnumerable<T>(PointerMemoryManager<T> mm) where T : unmanaged {
 		for(var i = 0; i < mm.Length; ++i)
 			yield return mm.GetSpan()[i];
-		
 	}
 
 	public static IEnumerable<T> AsEnumerable<T>(this Memory<T> memory) {
