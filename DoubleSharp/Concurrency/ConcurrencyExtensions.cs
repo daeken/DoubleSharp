@@ -11,7 +11,7 @@ public static class ConcurrencyExtensions {
 	/// <typeparam name="T">The type of the object.</typeparam>
 	/// <param name="object">The object.</param>
 	/// <param name="action">The <see cref="Action"/> delegate to perform.</param>
-	/// <returns>The object.</returns>
+	/// <returns>The provided <paramref name="object"/>.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="object"/> is null.</exception>
 	public static T Locked<T>(this T @object, Action action) {
 		if (@object == null) throw new ArgumentNullException(nameof(@object));
@@ -26,7 +26,7 @@ public static class ConcurrencyExtensions {
 	/// <typeparam name="T">The type of the object.</typeparam>
 	/// <param name="object">The object.</param>
 	/// <param name="action">The <see cref="Action{T}"/> delegate to perform on the object.</param>
-	/// <returns>The object.</returns>
+	/// <returns>The provided <paramref name="object"/>.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="object"/> is null.</exception>
 	public static T Locked<T>(this T @object, Action<T> action) {
 		if (@object == null) throw new ArgumentNullException(nameof(@object));

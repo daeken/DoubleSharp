@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -6,6 +7,7 @@ using DoubleSharp.Random;
 namespace DoubleSharp.Linq; 
 
 /// <summary>DoubleSharp LINQ Extensions.</summary>
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 public static class LinqExtensions {
 	/// <summary>
 	/// Projects each element of a sequence into a tuple of type (<see cref="int"/>, <typeparamref name="T"/>) representing the 0-based index of the element and its value.
@@ -113,7 +115,7 @@ public static class LinqExtensions {
 	/// <typeparam name="TResult">The type of the value returned by <paramref name="valueSelector"/>.</typeparam>
 	/// <param name="source">The source enumerable.</param>
 	/// <param name="keySelector">A function to extract the key for each element.</param>
-	/// <param name="valueSelector">A transform function to apply to each group element</param>
+	/// <param name="valueSelector">A transform function to apply to each group element.</param>
 	/// <returns>A <c>Dictionary&lt;<typeparamref name="TKey"/>, List&lt;<typeparamref name="TResult"/>&gt;&gt;</c> where each dictionary entry represents a group.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="keySelector"/> or <paramref name="valueSelector"/> is null.</exception>
 	/// <remarks>The <paramref name="valueSelector"/> transform function is applied after grouping.</remarks>
@@ -155,17 +157,18 @@ public static class LinqExtensions {
 		}
 	}
 
-	/// <summary>
-	/// Generates a list containing the elements of a source sequence, in random order, without altering the source.
-	/// </summary>
-	/// <typeparam name="T">The type of elements of source.</typeparam>
-	/// <param name="source">The source enumerable.</param>
-	/// <remarks>
-	/// <para>Shuffling is performed with the Fisher-Yates algorithm.</para>
-	/// <para>Random numbers are generated on a thread-local basis using <see cref="DoubleSharp.Random.Rng"/>.</para>
-	/// </remarks>
-	/// <exception cref="ArgumentNullException"><paramref name="list"/> is null.</exception>
-	public static List<T> Shuffled<T>(this IEnumerable<T> source) {
+    /// <summary>
+    /// Generates a list containing the elements of a source sequence, in random order, without altering the source.
+    /// </summary>
+    /// <typeparam name="T">The type of elements of source.</typeparam>
+    /// <param name="source">The source enumerable.</param>
+    /// <remarks>
+    /// <para>Shuffling is performed with the Fisher-Yates algorithm.</para>
+    /// <para>Random numbers are generated on a thread-local basis using <see cref="DoubleSharp.Random.Rng"/>.</para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
+    /// <returns>A list containing the elements of <paramref name="source"/> shuffled.</returns>
+    public static List<T> Shuffled<T>(this IEnumerable<T> source) {
 		if (source == null) throw new ArgumentNullException(nameof(source));
 		var list = source.ToList();
 		list.Shuffle();
@@ -175,7 +178,7 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the maximum value in a sequence.
 	/// </summary>
-	/// <typeparam name="T">The type of elements of source</typeparam>
+	/// <typeparam name="T">The type of elements of source.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <returns>The index of the element with the maximum value.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
@@ -185,7 +188,7 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the maximum value in a sequence.
 	/// </summary>
-	/// <typeparam name="T">The type of elements of source</typeparam>
+	/// <typeparam name="T">The type of elements of source.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="comparer">The <see cref="IComparer{T}"/> to compare values.</param>
 	/// <returns>The index of the element with the maximum value.</returns>
@@ -199,7 +202,8 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the maximum value in a sequence according to a specified key selector function.
 	/// </summary>
-	/// <typeparam name="TSource">The type of elements of source</typeparam>
+	/// <typeparam name="TSource">The type of elements of source.</typeparam>
+	/// <typeparam name="TKey">The type of the key by which to compare elements.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="keySelector">A function to extract the key for each element.</param>
 	/// <returns>The index of the element with the maximum value.</returns>
@@ -211,7 +215,8 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the maximum value in a sequence according to a specified key selector function.
 	/// </summary>
-	/// <typeparam name="TSource">The type of elements of source</typeparam>
+	/// <typeparam name="TSource">The type of elements of source.</typeparam>
+	/// <typeparam name="TKey">The type of the key by which to compare elements.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="keySelector">A function to extract the key for each element.</param>
 	/// <param name="comparer">The <see cref="IComparer{T}"/> to compare values.</param>
@@ -226,7 +231,7 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the minimum value in a sequence.
 	/// </summary>
-	/// <typeparam name="T">The type of elements of source</typeparam>
+	/// <typeparam name="T">The type of elements of source.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <returns>The index of the element with the minimum value.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
@@ -237,7 +242,7 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the minimum value in a sequence.
 	/// </summary>
-	/// <typeparam name="T">The type of elements of source</typeparam>
+	/// <typeparam name="T">The type of elements of source.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="comparer">The <see cref="IComparer{T}"/> to compare values.</param>
 	/// <returns>The index of the element with the minimum value.</returns>
@@ -251,7 +256,8 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the minimum value in a sequence according to a specified key selector function.
 	/// </summary>
-	/// <typeparam name="TSource">The type of elements of source</typeparam>
+	/// <typeparam name="TSource">The type of elements of source.</typeparam>
+	/// <typeparam name="TKey">The type of the key by which to compare elements.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="keySelector">A function to extract the key for each element.</param>
 	/// <returns>The index of the element with the minimum value.</returns>
@@ -263,7 +269,8 @@ public static class LinqExtensions {
 	/// <summary>
 	/// Returns the index of the minimum value in a sequence according to a specified key selector function.
 	/// </summary>
-	/// <typeparam name="TSource">The type of elements of source</typeparam>
+	/// <typeparam name="TSource">The type of elements of source.</typeparam>
+	/// <typeparam name="TKey">The type of the key by which to compare elements.</typeparam>
 	/// <param name="source">The source collection.</param>
 	/// <param name="keySelector">A function to extract the key for each element.</param>
 	/// <param name="comparer">The <see cref="IComparer{T}"/> to compare values.</param>
@@ -281,42 +288,42 @@ public static class LinqExtensions {
 	 */
 
 	/// <inheritdoc cref="IndexOfMax{T}(ICollection{T})" />
-	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T})"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T})"/>.</remarks>
 	public static int ArgMax<T>(this ICollection<T> source) => 
 		IndexOfMax(source);
 
 	/// <inheritdoc cref="IndexOfMax{T}(ICollection{T}, IComparer{T}?)" />
-	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T}, IComparer{T}?)"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T}, IComparer{T}?)"/>.</remarks>
 	public static int ArgMax<T>(this ICollection<T> source, IComparer<T>? comparer) => 
 		IndexOfMax(source, comparer);
 
 	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})" />
-	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/>.</remarks>
 	public static int ArgMax<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector) => 
 		IndexOfMaxBy(source, keySelector);
 
 	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>
-	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>.</remarks>
 	public static int ArgMax<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) => 
 		IndexOfMaxBy(source, keySelector, comparer);
 
 	/// <inheritdoc cref="IndexOfMin{T}(ICollection{T})" />
-	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T})"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T})"/>.</remarks>
 	public static int ArgMin<T>(this ICollection<T> source) =>
 		IndexOfMin(source);
 
 	/// <inheritdoc cref="IndexOfMin{T}(ICollection{T}, IComparer{T}?)" />
-	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T}, IComparer{T}?)"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T}, IComparer{T}?)"/>.</remarks>
 	public static int ArgMin<T>(this ICollection<T> source, IComparer<T>? comparer) =>
 		IndexOfMin(source, comparer);
 
-	/// <inheritdoc cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}))" />
-	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/></remarks>
+	/// <inheritdoc cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})" />
+	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/>.</remarks>
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector) =>
 		IndexOfMinBy(source, keySelector);
 
 	/// <inheritdoc cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>
-	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/></remarks>
+	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>.</remarks>
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) =>
 		IndexOfMinBy(source, keySelector, comparer);
 
@@ -431,7 +438,7 @@ public static class LinqExtensions {
     /// </summary>
     /// <param name="tuple">The tuple.</param>
     /// <returns>An array of <see cref="Type"/> objects representing the types of the tuple components.</returns>
-    public static Type[] GetComponentTypes(this ITuple tuple) =>
+    static Type[] GetComponentTypes(this ITuple tuple) =>
 	    tuple.GetType().GetGenericArguments();
 
     /// <summary>
@@ -455,12 +462,12 @@ public static class LinqExtensions {
     /// Enumerates the components of a tuple.
     /// </summary>
     /// <param name="tuple">The input tuple.</param>
-    /// <returns>An IEnumerable{object?} containing the elements of <paramref name="tuple"/>.</returns>
+    /// <returns>An IEnumerable&lt;object?&gt; containing the elements of <paramref name="tuple"/>.</returns>
     public static IEnumerable<object?> EnumerateComponents(this ITuple tuple) =>
 	    EnumerateComponents<object>(tuple);
 
     /// <summary>
-    /// A generator that constructs <paramref name="size"/> instances of {T}.
+    /// A generator that constructs <paramref name="size"/> instances of <typeparamref name="T"/>.
     /// </summary>
     /// <param name="size">Number of instances to construct.</param>
     /// <typeparam name="T">The type to construct.</typeparam>

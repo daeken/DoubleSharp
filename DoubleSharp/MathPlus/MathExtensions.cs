@@ -85,7 +85,7 @@ public static class MathExtensions {
 	/// </summary>
 	/// <param name="v">The value in which to check the bit.</param>
 	/// <param name="bit">The position of the bit to check.</param>
-	/// <returns>A boolean representing the presence or absence of bit position <param name="bit"/> in <param name="v"/>.</returns>
+	/// <returns>A boolean representing the presence or absence of bit position <paramref name="bit"/> in <paramref name="v"/>.</returns>
 	public static bool HasBit(this byte v, int bit) => (v & (1U << bit)) != 0;
 	/// <inheritdoc cref="HasBit(byte, int)" />
 	public static bool HasBit(this ushort v, int bit) => (v & (1U << bit)) != 0;

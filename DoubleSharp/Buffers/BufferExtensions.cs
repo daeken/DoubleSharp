@@ -40,11 +40,12 @@ public static class BufferExtensions {
 	public static void HexDump<T>(this T[] buffer, TextWriter? tw = null) where T : struct =>
 		HexDump((ReadOnlySpan<T>) buffer, tw);
 
-	/// <summary>
-	/// Returns a hex dump of the provided buffer as a string.
-	/// </summary>
-	/// <param name="buffer">The buffer to convert to a hex dump.</param>
-	public static string ToHexDump(this ReadOnlySpan<byte> buffer) {
+    /// <summary>
+    /// Returns a hex dump of the provided buffer as a string.
+    /// </summary>
+    /// <param name="buffer">The buffer to convert to a hex dump.</param>
+    /// <returns>The hex dump.</returns>
+    public static string ToHexDump(this ReadOnlySpan<byte> buffer) {
 		using var sw = new StringWriter();
 		buffer.HexDump(sw);
 		return sw.ToString();
