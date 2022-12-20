@@ -51,12 +51,12 @@ public static class BufferExtensions {
 
 	public static unsafe IEnumerable<T> AsEnumerable<T>(this Span<T> span) where T : unmanaged {
 		fixed(T* ptr = span)
-			return RefEnumerable(new PointerMemoryManager<T>(ptr, span.Length));
+			return RefEnumerable<T>(new(ptr), span.Length);
 	}
 
-	static IEnumerable<T> RefEnumerable<T>(PointerMemoryManager<T> mm) where T : unmanaged {
-		for(var i = 0; i < mm.Length; ++i)
-			yield return mm.GetSpan()[i];
+	static IEnumerable<T> RefEnumerable<T>(PointerHolder<T> ptr, int length) where T : unmanaged {
+		for(var i = 0; i < length; ++i)
+			yield return ptr[i];
 	}
 
 	public static IEnumerable<T> AsEnumerable<T>(this Memory<T> memory) {
@@ -102,24 +102,12 @@ public static class BufferExtensions {
 			throw new NotSupportedException();
 	}
 
-	unsafe class PointerMemoryManager<T> : MemoryManager<T>
-		where T : unmanaged
-	{
+	unsafe class PointerHolder<T> where T : unmanaged {
 		readonly T* Pointer;
-		public readonly int Length;
 
-		public PointerMemoryManager(T* pointer, int length) {
+		public PointerHolder(T* pointer) =>
 			Pointer = pointer;
-			Length = length;
-		}
-		public override Span<T> GetSpan() => new(Pointer, Length);
-		[ExcludeFromCodeCoverage]
-		protected override void Dispose(bool disposing) { }
-		[ExcludeFromCodeCoverage]
-		public override MemoryHandle Pin(int elementIndex = 0) =>
-			throw new NotSupportedException();
-		[ExcludeFromCodeCoverage]
-		public override void Unpin() => 
-			throw new NotSupportedException();
+
+		internal ref T this[int index] => ref Pointer[index];
 	}
 }
