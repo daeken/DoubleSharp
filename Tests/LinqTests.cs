@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 using DoubleSharp.Linq;
 
 namespace Tests;
@@ -24,12 +25,16 @@ public class LinqTests {
 
 	[Test]
 	public void ForEach() {
-		var sum = 0;
-		Enumerable.Range(0, 1000).ForEach(i => sum += i);
-		Assert.That(sum, Is.EqualTo(499500));
-		var coll = new ConcurrentBag<int>();
-		Enumerable.Range(0, 1000).AsParallel().ForEach(i => coll.Add(i));
-		Assert.That(coll.Sum(), Is.EqualTo(499500));
+		Assert.Multiple(() => {
+			Assert.That(() => LinqExtensions.ForEach<object>(null!, _ => {}), Throws.ArgumentNullException);
+			Assert.That(() => 1000.Range().ForEach(null!), Throws.ArgumentNullException);
+			var sum = 0;
+			Enumerable.Range(0, 1000).ForEach(i => sum += i);
+			Assert.That(sum, Is.EqualTo(499500));
+			var coll = new ConcurrentBag<int>();
+			Enumerable.Range(0, 1000).AsParallel().ForEach(i => coll.Add(i));
+			Assert.That(coll.Sum(), Is.EqualTo(499500));
+		});
 	}
 
 	[Test]
@@ -115,12 +120,32 @@ public class LinqTests {
 	}
 
 	[Test]
+	public void ArgMin() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { 1, 0, 0 }.ArgMin(), Is.EqualTo(1));
+			Assert.That(new[] { 0, 1, 0 }.ArgMin(), Is.EqualTo(0));
+			Assert.That(new[] { 1, 1, 0 }.ArgMin(), Is.EqualTo(2));
+			Assert.That(new[] { 0, 1, 1 }.ArgMin(), Is.EqualTo(0));
+		});
+	}
+
+	[Test]
 	public void ArgMaxBy() {
 		Assert.Multiple(() => {
 			Assert.That(new[] { (1, false), (0, false), (0, false) }.ArgMax(x => x.Item1), Is.EqualTo(0));
 			Assert.That(new[] { (0, false), (1, false), (0, false) }.ArgMax(x => x.Item1), Is.EqualTo(1));
 			Assert.That(new[] { (0, false), (1, false), (1, false) }.ArgMax(x => x.Item1), Is.EqualTo(1));
 			Assert.That(new[] { (0, false), (0, false), (1, false) }.ArgMax(x => x.Item1), Is.EqualTo(2));
+		});
+	}
+
+	[Test]
+	public void ArgMinBy() {
+		Assert.Multiple(() => {
+			Assert.That(new[] { (1, false), (0, false), (0, false) }.ArgMin(x => x.Item1), Is.EqualTo(1));
+			Assert.That(new[] { (0, false), (1, false), (0, false) }.ArgMin(x => x.Item1), Is.EqualTo(0));
+			Assert.That(new[] { (1, false), (1, false), (0, false) }.ArgMin(x => x.Item1), Is.EqualTo(2));
+			Assert.That(new[] { (0, false), (1, false), (1, false) }.ArgMin(x => x.Item1), Is.EqualTo(0));
 		});
 	}
 
@@ -162,6 +187,30 @@ public class LinqTests {
 			
 			Assert.That(1000.Times(() => 1).Sum(), Is.EqualTo(1000));
 			Assert.That(1000.Times(i => i).Sum(), Is.EqualTo(499500));
+		});
+	}
+
+	class ConstructTest { }
+
+	[Test]
+	public void ConstructMany() {
+		var objs = 100.ConstructMany<ConstructTest>().ToList();
+		Assert.Multiple(() => {
+			for(var i = 0; i < 100; ++i) {
+				for(var j = 0; j < 100; ++j)
+					if(j != i)
+						Assert.That(objs[i], Is.Not.SameAs(objs[j]));
+			}
+		});
+	}
+
+	[Test]
+	public void EnumerateComponents() {
+		var tuple = ("string", 5, Array.Empty<byte>(), "test");
+		Assert.Multiple(() => {
+			Assert.That(() => ((ITuple) null)!.EnumerateComponents().ForEach(_ => { }), Throws.ArgumentNullException);
+			Assert.That(tuple.EnumerateComponents<string>(), Is.EquivalentTo(new[] { "string", "test" }));
+			Assert.That(tuple.EnumerateComponents(), Is.EquivalentTo(new object[] { tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4 }));
 		});
 	}
 }

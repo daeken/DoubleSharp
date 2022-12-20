@@ -14,9 +14,11 @@ public static class LinqExtensions {
 	/// <param name="source">The source enumerable.</param>
 	/// <returns>An <see cref="IEnumerable{T}"/> whose elements are (<see cref="int"/>, <typeparamref name="T"/>) tuples containing the 0-based index and value of each element in the source enumerable.</returns>
 	/// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
+#pragma warning disable SA1316
 	public static IEnumerable<(int i, T x)> Enumerate<T>(this IEnumerable<T> source) =>
 		source == null ? throw new ArgumentNullException(nameof(source)) :
 		source.Select((x, i) => (i, x));
+#pragma warning restore SA1316
 
 	/// <summary>
 	/// Creates a <see cref="Dictionary{TKey, TValue}"/> from an <see cref="IEnumerable{T}"/> containing tuples of type (<typeparamref name="TKey"/>, <typeparamref name="TValue"/>).
@@ -281,42 +283,42 @@ public static class LinqExtensions {
 	/// <inheritdoc cref="IndexOfMax{T}(ICollection{T})" />
 	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T})"/></remarks>
 	public static int ArgMax<T>(this ICollection<T> source) => 
-		IndexOfMax<T>(source);
+		IndexOfMax(source);
 
 	/// <inheritdoc cref="IndexOfMax{T}(ICollection{T}, IComparer{T}?)" />
 	/// <remarks>This is an alias of <see cref="IndexOfMax{T}(ICollection{T}, IComparer{T}?)"/></remarks>
 	public static int ArgMax<T>(this ICollection<T> source, IComparer<T>? comparer) => 
-		IndexOfMax<T>(source, comparer);
+		IndexOfMax(source, comparer);
 
 	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}))" />
 	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/></remarks>
 	public static int ArgMax<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector) => 
-		IndexOfMaxBy<TSource, TKey>(source, keySelector);
+		IndexOfMaxBy(source, keySelector);
 
 	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>
 	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/></remarks>
 	public static int ArgMax<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) => 
-		IndexOfMaxBy<TSource, TKey>(source, keySelector, comparer);
+		IndexOfMaxBy(source, keySelector, comparer);
 
 	/// <inheritdoc cref="IndexOfMin{T}(ICollection{T})" />
 	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T})"/></remarks>
 	public static int ArgMin<T>(this ICollection<T> source) =>
-		IndexOfMin<T>(source);
+		IndexOfMin(source);
 
 	/// <inheritdoc cref="IndexOfMin{T}(ICollection{T}, IComparer{T}?)" />
 	/// <remarks>This is an alias of <see cref="IndexOfMin{T}(ICollection{T}, IComparer{T}?)"/></remarks>
 	public static int ArgMin<T>(this ICollection<T> source, IComparer<T>? comparer) =>
-		IndexOfMin<T>(source, comparer);
+		IndexOfMin(source, comparer);
 
 	/// <inheritdoc cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}))" />
 	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/></remarks>
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector) =>
-		IndexOfMinBy<TSource, TKey>(source, keySelector);
+		IndexOfMinBy(source, keySelector);
 
 	/// <inheritdoc cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/>
 	/// <remarks>This is an alias of <see cref="IndexOfMinBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}, IComparer{TKey}?)"/></remarks>
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) =>
-		IndexOfMinBy<TSource, TKey>(source, keySelector, comparer);
+		IndexOfMinBy(source, keySelector, comparer);
 
 	public static T Median<T>(this IEnumerable<T> source) where T : INumber<T> {
 		var sorted = source.Order().ToList();
@@ -380,8 +382,7 @@ public static class LinqExtensions {
     /// <para>If <paramref name="tuple"/> is null, no elements are returned.</para>
     /// </returns>
     public static IEnumerable<T> EnumerateComponents<T>(this ITuple? tuple) {
-        if(tuple == null)
-            yield break;
+	    if(tuple == null) throw new ArgumentNullException(nameof(tuple));
         var t = tuple.GetComponentTypes();
         for(var n = 0; n < tuple.Length; n++)
             if(t[n].IsAssignableTo(typeof(T)))
