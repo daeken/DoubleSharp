@@ -395,4 +395,7 @@ public static class LinqExtensions {
     /// <returns></returns>
     public static IEnumerable<object?> EnumerateComponents(this ITuple tuple) =>
 	    EnumerateComponents<object>(tuple);
+
+    public static IEnumerable<T> ConstructMany<T>(this int size) where T : new() =>
+	    size.Times(_ => new T());
 }
