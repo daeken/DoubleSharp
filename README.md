@@ -11,6 +11,7 @@ DoubleSharp provides convenience features for:
 - Pretty: `ToPrettyString` extension method for all objects to convert it to a human-readable form; `Print` and `PrettyPrint` extension methods (aliases) to print that to the console, akin to Python's `pprint` module
 - Buffers: `Cast` and `AsEnumerable` extensions for `Memory<T>` and `Span<T>`, `HexDump` (for Console/TextWriter output) and `ToHexDump` (for string creation) for all common unmanaged buffers
 - MathPlus: Swizzles for `Vector2/3/4`, tuple<->Vector conversions, Vector deconstruction, `Centroid` extension method for `IEnumerable<Vector2/3/4>`, `Map` for Vector to perform elementwise transformation, bit operations for unsigned integer types, `Ceil`/`Floor`/`Round` extensions for float/double, and `CeilInt`/`FloorInt`/`RoundInt` extensions for floor/double to int
+- IO: Vector extensions for BinaryReader/BinaryWriter.
 
 Our general goal is to make C# even easier to use than it is right now. If it's something we have to write in several projects, it should be here instead.
 
