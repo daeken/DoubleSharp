@@ -6,7 +6,7 @@ using DoubleSharp.Random;
 
 namespace DoubleSharp.Linq; 
 
-/// <summary>DoubleSharp LINQ Extensions</summary>
+/// <summary>DoubleSharp LINQ Extensions.</summary>
 public static class LinqExtensions {
 	/// <summary>
 	/// Projects each element of a sequence into a tuple of type (<see cref="int"/>, <typeparamref name="T"/>) representing the 0-based index of the element and its value.

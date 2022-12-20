@@ -2,9 +2,7 @@ using System.Numerics;
 
 namespace DoubleSharp.IO; 
 
-/// <summary>
-/// DoubleSharp BinaryReader/BinaryWriter extensions.
-/// </summary>
+/// <summary>DoubleSharp BinaryReader/BinaryWriter Extensions.</summary>
 public static class BinaryIOExtensions {
 	/// <summary>
 	/// Read a Vector2 from this stream. The current position of the stream is advanced by eight.
