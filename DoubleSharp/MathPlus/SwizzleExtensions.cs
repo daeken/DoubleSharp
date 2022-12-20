@@ -4,6 +4,7 @@ using System.Numerics;
 
 namespace DoubleSharp.MathPlus; 
 
+/// <summary>Swizzle extension methods for System.Numerics.Vector2/3/4.</summary>
 public static class SwizzleExtensions {
 #region 2x2 Swizzles
 	/// <summary>

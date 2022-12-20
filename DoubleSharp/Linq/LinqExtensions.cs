@@ -1,7 +1,6 @@
 using System.Diagnostics.Contracts;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using DoubleSharp.Pretty;
 using DoubleSharp.Random;
 
 namespace DoubleSharp.Linq; 
@@ -291,7 +290,7 @@ public static class LinqExtensions {
 	public static int ArgMax<T>(this ICollection<T> source, IComparer<T>? comparer) => 
 		IndexOfMax(source, comparer);
 
-	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey}))" />
+	/// <inheritdoc cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})" />
 	/// <remarks>This is an alias of <see cref="IndexOfMaxBy{TSource, TKey}(ICollection{TSource}, Func{TSource, TKey})"/></remarks>
 	public static int ArgMax<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector) => 
 		IndexOfMaxBy(source, keySelector);
@@ -321,6 +320,13 @@ public static class LinqExtensions {
 	public static int ArgMin<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer) =>
 		IndexOfMinBy(source, keySelector, comparer);
 
+	/// <summary>
+	/// Finds the median of a sequence of numbers.
+	/// </summary>
+	/// <param name="source">The sequence of numbers.</param>
+	/// <typeparam name="T">The type of number.</typeparam>
+	/// <returns>The median of the sequence.</returns>
+	/// <exception cref="InvalidOperationException">The sequence must contain at least one number.</exception>
 	public static T Median<T>(this IEnumerable<T> source) where T : INumber<T> {
 		var sorted = source.Order().ToList();
 		if(sorted.Count == 0) throw new InvalidOperationException("Sequence contains no elements");
@@ -331,7 +337,17 @@ public static class LinqExtensions {
 		return (a + b) / T.CreateChecked(2);
 	}
 	
-	// WARNING: This will always return the lower end of the median if it's an even-lengthed sequence
+	/// <summary>
+	/// Finds the value which contains the median, using a function to order the values.
+	/// 
+	/// WARNING: This will always return the lower end of the median if it's an even-lengthed sequence.
+	/// </summary>
+	/// <param name="source">The sequence of values.</param>
+	/// <param name="by">The function on which to sort the values.</param>
+	/// <typeparam name="TValue">The type of the input values.</typeparam>
+	/// <typeparam name="TKey">The type to sort by.</typeparam>
+	/// <returns>For an odd-lengthed sequence, returns the middle element after sorting. For an even-lengthed sequence, returns the lower of the two middle elements.</returns>
+	/// <exception cref="InvalidOperationException">The sequence must contain at least one number.</exception>
 	public static TValue MedianBy<TValue, TKey>(this IEnumerable<TValue> source, Func<TValue, TKey> by) {
 		var sorted = source.OrderBy(by).ToList();
 		return sorted.Count switch {
@@ -342,19 +358,45 @@ public static class LinqExtensions {
 		};
 	}
 	
+	/// <summary>
+	/// Generates a sequence of numbers from 0 to <paramref name="end"/>, exclusive.
+	/// </summary>
+	/// <param name="end">The exclusive end of the range.</param>
+	/// <returns>An IEnumerable{int} containing values in the range.</returns>
 	public static IEnumerable<int> Range(this int end) =>
 		Enumerable.Range(0, end);
+	/// <summary>
+	/// Generates a sequence of numbers from <paramref name="range"/>.Start to <paramref name="range"/>.End, exclusive.
+	/// </summary>
+	/// <param name="range">The start and exclusive end of the range.</param>
+	/// <returns>An IEnumerable{int} containing values in the range.</returns>
 	public static IEnumerable<int> Range(this (int Start, int End) range) =>
 		Enumerable.Range(range.Start, range.End - range.Start);
+	/// <summary>
+	/// Generates a sequence of numbers from <paramref name="range"/>.Start to <paramref name="range"/>.End, exclusive,
+	/// stepping by <paramref name="range"/>.Step.
+	/// </summary>
+	/// <param name="range">The start, exclusive end, and step value of the range.</param>
+	/// <returns>An IEnumerable{int} containing values in the range.</returns>
 	public static IEnumerable<int> Range(this (int Start, int End, int Step) range) {
 		for(var i = range.Start; i < range.End; i += range.Step)
 			yield return i;
 	}
 
+	/// <summary>
+	/// Executes a function <paramref name="count"/> times.
+	/// </summary>
+	/// <param name="count">The number of times to execute <paramref name="functor"/>.</param>
+	/// <param name="functor">The function to execute.</param>
 	public static void Times(this int count, Action functor) {
 		for(var i = 0; i < count; ++i)
 			functor();
 	}
+	/// <summary>
+	/// Executes a function <paramref name="count"/> times, passing an index to the function.
+	/// </summary>
+	/// <param name="count">The number of times to execute <paramref name="functor"/>.</param>
+	/// <param name="functor">The function to execute.</param>
 	public static void Times(this int count, Action<int> functor) {
 		for(var i = 0; i < count; ++i)
 			functor(i);
@@ -363,9 +405,23 @@ public static class LinqExtensions {
 	// If you accidentally make your functor return a value when you wanted to
 	// use the above Action instances instead, the Pure attribute throws a warning.
 	// Basically, it adds a small safety to the footgun.
+	/// <summary>
+	/// Executes a function <paramref name="count"/> times and generates an IEnumerable{T} from the results.
+	/// </summary>
+	/// <param name="count">The number of times to execute <paramref name="functor"/>.</param>
+	/// <param name="functor">The function to execute.</param>
+	/// <typeparam name="T">The type of return from <paramref name="functor"/>.</typeparam>
+	/// <returns>An IEnumerable{T} containing the values from the executed <paramref name="functor"/>s.</returns>
 	[Pure]
 	public static IEnumerable<T> Times<T>(this int count, Func<T> functor) =>
 		count.Range().Select(_ => functor());
+	/// <summary>
+	/// Executes a function <paramref name="count"/> times, passing an index, and generates an IEnumerable{T} from the results.
+	/// </summary>
+	/// <param name="count">The number of times to execute <paramref name="functor"/>.</param>
+	/// <param name="functor">The function to execute.</param>
+	/// <typeparam name="T">The type of return from <paramref name="functor"/>.</typeparam>
+	/// <returns>An IEnumerable{T} containing the values from the executed <paramref name="functor"/>s.</returns>
 	[Pure]
 	public static IEnumerable<T> Times<T>(this int count, Func<int, T> functor) =>
 		count.Range().Select(functor);
@@ -398,11 +454,17 @@ public static class LinqExtensions {
     /// <summary>
     /// Enumerates the components of a tuple.
     /// </summary>
-    /// <param name="tuple"></param>
-    /// <returns></returns>
+    /// <param name="tuple">The input tuple.</param>
+    /// <returns>An IEnumerable{object?} containing the elements of <paramref name="tuple"/>.</returns>
     public static IEnumerable<object?> EnumerateComponents(this ITuple tuple) =>
 	    EnumerateComponents<object>(tuple);
 
+    /// <summary>
+    /// A generator that constructs <paramref name="size"/> instances of {T}.
+    /// </summary>
+    /// <param name="size">Number of instances to construct.</param>
+    /// <typeparam name="T">The type to construct.</typeparam>
+    /// <returns>An IEnumerable<typeparamref name="T"/> of <paramref name="size"/> generated <typeparamref name="T"/> instances.</returns>
     public static IEnumerable<T> ConstructMany<T>(this int size) where T : new() =>
 	    size.Times(_ => new T());
 }

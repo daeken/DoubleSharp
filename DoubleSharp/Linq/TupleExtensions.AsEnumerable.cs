@@ -1,5 +1,6 @@
 namespace DoubleSharp.Linq; 
 
+/// <summary>DoubleSharp extensions to convert homogenously-typed tuples to IEnumerables.</summary>
 public static class TupleExtensions {
 	/// <summary>
 	/// Enumerates the components of a tuple when all the types are the same.

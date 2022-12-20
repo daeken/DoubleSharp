@@ -4,6 +4,7 @@ using System.Reflection;
 
 namespace DoubleSharp.Pretty;
 
+/// <summary>DoubleSharp pretty printing extensions.</summary>
 public static class PrettyExtensions {
 	static readonly IReadOnlyDictionary<Type, MethodInfo> Printers;
 	[ExcludeFromCodeCoverage]
@@ -23,18 +24,31 @@ public static class PrettyExtensions {
 		Printers = printers;
 	}
 	
+	/// <summary>
+	/// Pretty-prints an object to Console.
+	/// </summary>
+	/// <param name="obj">The object to print.</param>
+	/// <typeparam name="T">The type of <paramref name="obj"/>.</typeparam>
+	/// <returns>The original object, <paramref name="obj"/>.</returns>
 	[ExcludeFromCodeCoverage]
 	public static T Print<T>(this T obj) {
 		Console.WriteLine(obj.ToPrettyString());
 		return obj;
 	}
 
+	/// <inheritdoc cref="PrettyPrint{T}(T)" />
 	[ExcludeFromCodeCoverage]
 	public static T PrettyPrint<T>(this T obj) {
 		Console.WriteLine(obj.ToPrettyString());
 		return obj;
 	}
 
+	/// <summary>
+	/// Convert an object to a pretty-printed string.
+	/// </summary>
+	/// <param name="obj">The object to pretty-print.</param>
+	/// <typeparam name="T">The type of <paramref name="obj"/>.</typeparam>
+	/// <returns>The pretty-printed string value of <paramref name="obj"/>.</returns>
 	public static string ToPrettyString<T>(this T obj) => obj == null
 		? $"({typeof(T).ToPrettyString()}) null"
 		: ToPrettyString((object) obj);
