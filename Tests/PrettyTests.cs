@@ -99,4 +99,13 @@ public class PrettyTests {
 			Assert.That(new Foo2 { Bar = 7, Baz = "hax" }.ToPrettyString(), Is.EqualTo("Tests.PrettyTests+Foo2 {\n\tBar = 7, \n\tBaz = \"hax\"\n}"));
 		});
 	}
+
+	class Custom : IPrettyPrintable {
+		public string ToPrettyString() => "This is a pretty string!";
+	}
+
+	[Test]
+	public void IPrettyPrintable() {
+		Assert.That(new Custom().ToPrettyString(), Is.EqualTo("This is a pretty string!"));
+	}
 }

@@ -7,7 +7,6 @@ namespace DoubleSharp.Pretty;
 /// <summary>DoubleSharp pretty printing extensions.</summary>
 public static class PrettyExtensions {
 	static readonly IReadOnlyDictionary<Type, MethodInfo> Printers;
-	[ExcludeFromCodeCoverage]
 	static PrettyExtensions() {
 		var printers = new Dictionary<Type, MethodInfo>();
 		foreach(var asm in AppDomain.CurrentDomain.GetAssemblies()) {
