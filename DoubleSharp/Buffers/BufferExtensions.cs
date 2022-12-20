@@ -105,9 +105,7 @@ public static class BufferExtensions {
 	unsafe class PointerHolder<T> where T : unmanaged {
 		readonly T* Pointer;
 
-		public PointerHolder(T* pointer) =>
-			Pointer = pointer;
-
+		public PointerHolder(T* pointer) => Pointer = pointer;
 		internal ref T this[int index] => ref Pointer[index];
 	}
 }
