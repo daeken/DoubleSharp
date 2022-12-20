@@ -16,6 +16,11 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
         <CodeAnalysisRuleSet>rulesets\StyleCop.ruleset</CodeAnalysisRuleSet>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+        <RunAnalyzers>true</RunAnalyzers>
+        <WarningsAsErrors>;NU1605;SYSLIB0011</WarningsAsErrors>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
