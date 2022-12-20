@@ -1,3 +1,5 @@
+[![NuGet Badge for DoubleSharp](https://img.shields.io/nuget/dt/DoubleSharp)](https://www.nuget.org/packages/DoubleSharp/) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/daeken/DoubleSharp/publish.yml?branch=main)
+
 Overview
 ========
 
