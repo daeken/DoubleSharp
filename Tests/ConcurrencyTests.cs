@@ -7,9 +7,11 @@ public class ConcurrencyTests {
 	[Test]
 	public void Locked() {
 		var foo = "foB";
+		Assert.That(() => ((object) null).Locked(() => {}), Throws.ArgumentNullException);
 		var count = 0;
 		Parallel.For(0, 10000, _ => foo.Locked(() => count++));
 		Assert.That(count, Is.EqualTo(10000));
+		Assert.That(() => ((object) null).Locked(x => {}), Throws.ArgumentNullException);
 		var comb = "";
 		Parallel.For(0, 1000, _ => foo.Locked(x => comb += x));
 		Assert.That(comb, Is.EqualTo(string.Concat(Enumerable.Repeat(foo, 1000))));
@@ -73,5 +75,49 @@ public class ConcurrencyTests {
 		Parallel.For(0, 10000, _ => count4.Add(3UL));
 		Assert.That(count4, Is.EqualTo(30000UL));
 		Assert.That(count4.Add(5UL), Is.EqualTo(30005UL));
+	}
+
+	[Test]
+	public void And() {
+		Assert.Multiple(() => {
+			var tint = 0x7F;
+			Assert.That(tint.And(0xFF), Is.EqualTo(0x7F));
+			Assert.That(tint.And(0x0F), Is.EqualTo(0x7F));
+			Assert.That(tint, Is.EqualTo(0x0F));
+			var tuint = 0x7FU;
+			Assert.That(tuint.And(0xFF), Is.EqualTo(0x7FU));
+			Assert.That(tuint.And(0x0F), Is.EqualTo(0x7FU));
+			Assert.That(tuint, Is.EqualTo(0x0FU));
+			var tlong = 0x7FL;
+			Assert.That(tlong.And(0xFF), Is.EqualTo(0x7FL));
+			Assert.That(tlong.And(0x0F), Is.EqualTo(0x7FL));
+			Assert.That(tlong, Is.EqualTo(0x0FL));
+			var tulong = 0x7FUL;
+			Assert.That(tulong.And(0xFF), Is.EqualTo(0x7FUL));
+			Assert.That(tulong.And(0x0F), Is.EqualTo(0x7FUL));
+			Assert.That(tulong, Is.EqualTo(0x0FUL));
+		});
+	}
+	
+	[Test]
+	public void Or() {
+		Assert.Multiple(() => {
+			var tint = 0x00;
+			Assert.That(tint.Or(0x01), Is.EqualTo(0x00));
+			Assert.That(tint.Or(0x02), Is.EqualTo(0x01));
+			Assert.That(tint, Is.EqualTo(0x03));
+			var tuint = 0x00U;
+			Assert.That(tuint.Or(0x01), Is.EqualTo(0x00U));
+			Assert.That(tuint.Or(0x02), Is.EqualTo(0x01U));
+			Assert.That(tuint, Is.EqualTo(0x03U));
+			var tlong = 0x00L;
+			Assert.That(tlong.Or(0x01), Is.EqualTo(0x00L));
+			Assert.That(tlong.Or(0x02), Is.EqualTo(0x01L));
+			Assert.That(tlong, Is.EqualTo(0x03L));
+			var tulong = 0x00UL;
+			Assert.That(tulong.Or(0x01), Is.EqualTo(0x00UL));
+			Assert.That(tulong.Or(0x02), Is.EqualTo(0x01UL));
+			Assert.That(tulong, Is.EqualTo(0x03UL));
+		});
 	}
 }

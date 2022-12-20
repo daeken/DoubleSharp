@@ -117,7 +117,7 @@ public static class ConcurrencyExtensions {
 	/// <param name="variable">The variable containing the first number to be combined. The result is stored here.</param>
 	/// <param name="value">The value to be combined with <paramref name="variable"/>.</param>
 	/// <exception cref="NullReferenceException">The address of <paramref name="variable"/> is a <c>null</c> pointer.</exception>
-	/// <returns>The value that was stored as a result of this operation.</returns>
+	/// <returns>The original value of the variable.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int And(this ref int variable, int value) =>
 		Interlocked.And(ref variable, value);
@@ -143,7 +143,7 @@ public static class ConcurrencyExtensions {
 	/// <param name="variable">The variable containing the first number to be combined. The result is stored here.</param>
 	/// <param name="value">The value to be combined with <paramref name="variable"/>.</param>
 	/// <exception cref="NullReferenceException">The address of <paramref name="variable"/> is a <c>null</c> pointer.</exception>
-	/// <returns>The value that was stored as a result of this operation.</returns>
+	/// <returns>The original value of the variable.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static int Or(this ref int variable, int value) =>
 		Interlocked.Or(ref variable, value);
