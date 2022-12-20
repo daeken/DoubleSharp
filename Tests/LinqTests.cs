@@ -169,9 +169,9 @@ public class LinqTests {
 	[Test]
 	public void Range() {
 		Assert.Multiple(() => {
-			Assert.That(5.Range().ToArray(), Is.EquivalentTo(new[] { 0, 1, 2, 3, 4 }));
-			Assert.That((3, 6).Range().ToArray(), Is.EquivalentTo(new[] { 3, 4, 5 }));
-			Assert.That((0, 16, 5).Range().ToArray(), Is.EquivalentTo(new[] { 0, 5, 10, 15 }));
+			Assert.That(5.Range().ToArray(), Is.EqualTo(new[] { 0, 1, 2, 3, 4 }));
+			Assert.That((3, 6).Range().ToArray(), Is.EqualTo(new[] { 3, 4, 5 }));
+			Assert.That((0, 16, 5).Range().ToArray(), Is.EqualTo(new[] { 0, 5, 10, 15 }));
 		});
 	}
 
@@ -209,8 +209,22 @@ public class LinqTests {
 		var tuple = ("string", 5, Array.Empty<byte>(), "test");
 		Assert.Multiple(() => {
 			Assert.That(() => ((ITuple) null)!.EnumerateComponents().ForEach(_ => { }), Throws.ArgumentNullException);
-			Assert.That(tuple.EnumerateComponents<string>(), Is.EquivalentTo(new[] { "string", "test" }));
-			Assert.That(tuple.EnumerateComponents(), Is.EquivalentTo(new object[] { tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4 }));
+			Assert.That(tuple.EnumerateComponents<string>(), Is.EqualTo(new[] { "string", "test" }));
+			Assert.That(tuple.EnumerateComponents(), Is.EqualTo(new object[] { tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4 }));
 		});
+	}
+
+	[Test]
+	// TODO: Figure out a better test
+	public void Shuffle() {
+		var list = 1000.Range().ToList();
+		list.Shuffle();
+		Assert.That(list, Is.Not.EqualTo(1000.Range()));
+	}
+
+	[Test]
+	// TODO: Figure out a better test
+	public void Shuffled() {
+		Assert.That(1000.Range().Shuffled(), Is.Not.EqualTo(1000.Range()));
 	}
 }

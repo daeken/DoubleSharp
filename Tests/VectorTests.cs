@@ -32,9 +32,9 @@ public class VectorTests {
 		var vec = (1, 2, 3, 4).ToVector();
 		var arr = new[] { vec.X, vec.Y, vec.Z, vec.W };
 		Assert.Multiple(() => {
-			Assert.That(vec.XY().ToArray(), Is.EquivalentTo(arr.Take(2)));
-			Assert.That(vec.XYZ().ToArray(), Is.EquivalentTo(arr.Take(3)));
-			Assert.That(vec.ToArray(), Is.EquivalentTo(arr));
+			Assert.That(vec.XY().ToArray(), Is.EqualTo(arr.Take(2)));
+			Assert.That(vec.XYZ().ToArray(), Is.EqualTo(arr.Take(3)));
+			Assert.That(vec.ToArray(), Is.EqualTo(arr));
 		});
 	}
 	

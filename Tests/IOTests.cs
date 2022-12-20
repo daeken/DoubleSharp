@@ -15,19 +15,19 @@ public class IOTests {
 				using var bw = new BinaryWriter(ms);
 				bw.Write(vec.XY());
 				bw.Flush();
-				Assert.That(ms.ToArray(), Is.EquivalentTo(bytes.Take(2 * 4)));
+				Assert.That(ms.ToArray(), Is.EqualTo(bytes.Take(2 * 4)));
 			}
 			using(var ms = new MemoryStream()) {
 				using var bw = new BinaryWriter(ms);
 				bw.Write(vec.XYZ());
 				bw.Flush();
-				Assert.That(ms.ToArray(), Is.EquivalentTo(bytes.Take(3 * 4)));
+				Assert.That(ms.ToArray(), Is.EqualTo(bytes.Take(3 * 4)));
 			}
 			using(var ms = new MemoryStream()) {
 				using var bw = new BinaryWriter(ms);
 				bw.Write(vec);
 				bw.Flush();
-				Assert.That(ms.ToArray(), Is.EquivalentTo(bytes));
+				Assert.That(ms.ToArray(), Is.EqualTo(bytes));
 			}
 		});
 	}

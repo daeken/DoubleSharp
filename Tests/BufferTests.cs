@@ -54,21 +54,21 @@ public class BufferTests {
 			var bmem = new Memory<byte>(new byte[] { 0xEF, 0xBE, 0xAD, 0xDE, 0xBE,0xBA, 0xFE, 0xCA });
 			var umem = new Memory<uint>(new[] { deadbeef, cafebabe });
 			
-			Assert.That(bmem.Cast<byte, uint>().ToArray(), Is.EquivalentTo(umem.ToArray()));
-			Assert.That(umem.Cast<uint, byte>().ToArray(), Is.EquivalentTo(bmem.ToArray()));
+			Assert.That(bmem.Cast<byte, uint>().ToArray(), Is.EqualTo(umem.ToArray()));
+			Assert.That(umem.Cast<uint, byte>().ToArray(), Is.EqualTo(bmem.ToArray()));
 			
-			Assert.That(bmem.Cast<byte, byte>().ToArray(), Is.EquivalentTo(bmem.ToArray()));
-			Assert.That(umem.Cast<uint, uint>().ToArray(), Is.EquivalentTo(umem.ToArray()));
+			Assert.That(bmem.Cast<byte, byte>().ToArray(), Is.EqualTo(bmem.ToArray()));
+			Assert.That(umem.Cast<uint, uint>().ToArray(), Is.EqualTo(umem.ToArray()));
 		});
 	}
 
 	[Test]
 	public void AsEnumerable() {
 		Assert.Multiple(() => {
-			Assert.That(new byte[] { 1, 2, 3, 4 }.AsSpan().AsEnumerable(), Is.EquivalentTo(new byte[] { 1, 2, 3, 4 }));
-			Assert.That(new[] { 1, 2, 3, 4 }.AsSpan().AsEnumerable(), Is.EquivalentTo(new[] { 1, 2, 3, 4 }));
-			Assert.That(new byte[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EquivalentTo(new byte[] { 1, 2, 3, 4 }));
-			Assert.That(new[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EquivalentTo(new[] { 1, 2, 3, 4 }));
+			Assert.That(new byte[] { 1, 2, 3, 4 }.AsSpan().AsEnumerable(), Is.EqualTo(new byte[] { 1, 2, 3, 4 }));
+			Assert.That(new[] { 1, 2, 3, 4 }.AsSpan().AsEnumerable(), Is.EqualTo(new[] { 1, 2, 3, 4 }));
+			Assert.That(new byte[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EqualTo(new byte[] { 1, 2, 3, 4 }));
+			Assert.That(new[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EqualTo(new[] { 1, 2, 3, 4 }));
 		});
 	}
 
@@ -78,12 +78,12 @@ public class BufferTests {
 			var span = 100000.Times(i => i).ToArray().AsSpan();
 			var mapped = span.Map(x => x * 5);
 			Assert.That((nint) Unsafe.AsPointer(ref mapped[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref span[0])));
-			Assert.That(span.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			Assert.That(span.AsEnumerable(), Is.EqualTo(100000.Times(i => i * 5)));
 			
 			var memory = 100000.Times(i => i).ToArray().AsMemory();
 			var mmapped = memory.Map(x => x * 5);
 			Assert.That((nint) Unsafe.AsPointer(ref mmapped.Span[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref memory.Span[0])));
-			Assert.That(memory.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			Assert.That(memory.AsEnumerable(), Is.EqualTo(100000.Times(i => i * 5)));
 		});
 	}
 
@@ -96,12 +96,12 @@ public class BufferTests {
 			var span = 100000.Times(i => i).ToArray().AsSpan();
 			var mapped = span.ParallelMap(x => x * 5);
 			Assert.That((nint) Unsafe.AsPointer(ref mapped[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref span[0])));
-			Assert.That(span.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			Assert.That(span.AsEnumerable(), Is.EqualTo(100000.Times(i => i * 5)));
 			
 			var memory = 100000.Times(i => i).ToArray().AsMemory();
 			var mmapped = memory.ParallelMap(x => x * 5);
 			Assert.That((nint) Unsafe.AsPointer(ref mmapped.Span[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref memory.Span[0])));
-			Assert.That(memory.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			Assert.That(memory.AsEnumerable(), Is.EqualTo(100000.Times(i => i * 5)));
 		});
 	}
 }
