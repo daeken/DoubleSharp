@@ -10,6 +10,17 @@ public static class VectorExtensions {
 	public static void Deconstruct(this Vector4 vec, out float x, out float y, out float z, out float w) =>
 		(x, y, z, w) = (vec.X, vec.Y, vec.Z, vec.W);
 
+	public static (float X, float Y) ToTuple(this Vector2 vec) =>
+		(vec.X, vec.Y);
+	public static (float X, float Y, float Z) ToTuple(this Vector3 vec) =>
+		(vec.X, vec.Y, vec.Z);
+	public static (float X, float Y, float Z, float W) ToTuple(this Vector4 vec) =>
+		(vec.X, vec.Y, vec.Z, vec.W);
+
+	public static float[] ToArray(this Vector2 vec) => new[] { vec.X, vec.Y };
+	public static float[] ToArray(this Vector3 vec) => new[] { vec.X, vec.Y, vec.Z };
+	public static float[] ToArray(this Vector4 vec) => new[] { vec.X, vec.Y, vec.Z, vec.W };
+
 	public static Vector2 ToVector(this (float X, float Y) tuple) =>
 		new(tuple.X, tuple.Y);
 	public static Vector3 ToVector(this (float X, float Y, float Z) tuple) =>

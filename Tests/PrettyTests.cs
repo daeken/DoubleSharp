@@ -71,8 +71,8 @@ public class PrettyTests {
 	[Test]
 	public void Null() {
 		Assert.Multiple(() => {
-			Assert.That(((string?) null).ToPrettyString(), Is.EqualTo("(string) null"));
-			Assert.That(((Dictionary<string, int>?) null).ToPrettyString(), Is.EqualTo("(Dictionary<string, int>) null"));
+			Assert.That(((string) null).ToPrettyString(), Is.EqualTo("(string) null"));
+			Assert.That(((Dictionary<string, int>) null).ToPrettyString(), Is.EqualTo("(Dictionary<string, int>) null"));
 			Assert.That(new Dictionary<string, int?> {
 				["Hello"] = 5,
 				["World"] = null,
