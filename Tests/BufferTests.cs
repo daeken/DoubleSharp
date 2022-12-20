@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using DoubleSharp.Buffers;
 using DoubleSharp.Linq;
 
@@ -68,6 +69,39 @@ public class BufferTests {
 			Assert.That(new[] { 1, 2, 3, 4 }.AsSpan().AsEnumerable(), Is.EquivalentTo(new[] { 1, 2, 3, 4 }));
 			Assert.That(new byte[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EquivalentTo(new byte[] { 1, 2, 3, 4 }));
 			Assert.That(new[] { 1, 2, 3, 4 }.AsMemory().AsEnumerable(), Is.EquivalentTo(new[] { 1, 2, 3, 4 }));
+		});
+	}
+
+	[Test]
+	public unsafe void Map() {
+		Assert.Multiple(() => {
+			var span = 100000.Times(i => i).ToArray().AsSpan();
+			var mapped = span.Map(x => x * 5);
+			Assert.That((nint) Unsafe.AsPointer(ref mapped[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref span[0])));
+			Assert.That(span.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			
+			var memory = 100000.Times(i => i).ToArray().AsMemory();
+			var mmapped = memory.Map(x => x * 5);
+			Assert.That((nint) Unsafe.AsPointer(ref mmapped.Span[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref memory.Span[0])));
+			Assert.That(memory.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+		});
+	}
+
+	[Test]
+	public unsafe void ParallelMap() {
+		Assert.Multiple(() => {
+			var espan = Array.Empty<byte>().AsSpan();
+			Assert.That(espan.ParallelMap(x => x).Length, Is.EqualTo(0));
+			
+			var span = 100000.Times(i => i).ToArray().AsSpan();
+			var mapped = span.ParallelMap(x => x * 5);
+			Assert.That((nint) Unsafe.AsPointer(ref mapped[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref span[0])));
+			Assert.That(span.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
+			
+			var memory = 100000.Times(i => i).ToArray().AsMemory();
+			var mmapped = memory.ParallelMap(x => x * 5);
+			Assert.That((nint) Unsafe.AsPointer(ref mmapped.Span[0]), Is.EqualTo((nint) Unsafe.AsPointer(ref memory.Span[0])));
+			Assert.That(memory.AsEnumerable(), Is.EquivalentTo(100000.Times(i => i * 5)));
 		});
 	}
 }

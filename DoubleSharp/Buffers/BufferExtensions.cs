@@ -1,5 +1,6 @@
 using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace DoubleSharp.Buffers; 
@@ -65,6 +66,32 @@ public static class BufferExtensions {
 			yield return memory.Span[i];
 	}
 
+	public static Span<T> Map<T>(this Span<T> span, Func<T, T> functor) {
+		for(var i = 0; i < span.Length; ++i)
+			span[i] = functor(span[i]);
+		return span;
+	}
+
+	public static Memory<T> Map<T>(this Memory<T> memory, Func<T, T> functor) {
+		memory.Span.Map(functor);
+		return memory;
+	}
+
+	public static unsafe Span<T> ParallelMap<T>(this Span<T> span, Func<T, T> functor) {
+		if(span.Length == 0) return span;
+#pragma warning disable CS8500
+		var ptr = (T*) Unsafe.AsPointer(ref span[0]);
+		Parallel.For(0, span.Length, i =>
+			ptr[i] = functor(ptr[i]));
+#pragma warning restore CS8500
+		return span;
+	}
+
+	public static Memory<T> ParallelMap<T>(this Memory<T> memory, Func<T, T> functor) {
+		memory.Span.ParallelMap(functor);
+		return memory;
+	}
+
 	public static Span<TTo> Cast<TFrom, TTo>(this Span<TFrom> from)
 		where TFrom : struct
 		where TTo : struct
@@ -82,7 +109,7 @@ public static class BufferExtensions {
 		if (typeof(TFrom) == typeof(TTo)) return (Memory<TTo>) (object) from;
 		return new CastMemoryManager<TFrom, TTo>(from).Memory;
 	}
-		
+
 	class CastMemoryManager<TFrom, TTo> : MemoryManager<TTo>
 		where TFrom : unmanaged
 		where TTo : unmanaged
