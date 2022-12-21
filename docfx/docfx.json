@@ -4,18 +4,17 @@
       "src": [
         {
           "files": [ "DoubleSharp/bin/Release/net7.0/DoubleSharp.dll" ],
-          "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../"
         }
       ],
-      "dest": "DoubleSharp/obj/api"
+      "dest": "obj/api"
     }
   ],
   "build": {
     "content": [
       {
         "files": [ "**/*.yml" ],
-        "src": "../DoubleSharp/obj/api",
+        "src": "obj/api",
         "dest": "api"
       },
       {
