@@ -17,6 +17,11 @@ DoubleSharp provides convenience features for:
 
 Our general goal is to make C# even easier to use than it is right now. If it's something we have to write in several projects, it should be here instead.
 
+API Documentation
+=================
+
+API docs are available at [https://doublesharp.dev/](https://doublesharp.dev/)
+
 Usage
 =====
 
