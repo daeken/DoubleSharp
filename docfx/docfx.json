@@ -8,14 +8,14 @@
           "src": "../"
         }
       ],
-      "dest": "obj/api"
+      "dest": "DoubleSharp/obj/api"
     }
   ],
   "build": {
     "content": [
       {
         "files": [ "**/*.yml" ],
-        "src": "obj/api",
+        "src": "../DoubleSharp/obj/api",
         "dest": "api"
       },
       {
