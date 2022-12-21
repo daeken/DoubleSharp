@@ -3,9 +3,9 @@
     {
       "src": [
         {
-          "files": [ "../DoubleSharp/DoubleSharp.csproj" ],
+          "files": [ "DoubleSharp/DoubleSharp.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "/"
+          "src": "../"
         }
       ],
       "dest": "obj/api"
