@@ -35,7 +35,7 @@ public static class PrettyExtensions {
 		return obj;
 	}
 
-	/// <inheritdoc cref="PrettyPrint{T}(T)" />
+	/// <inheritdoc cref="Print{T}(T)" />
 	[ExcludeFromCodeCoverage]
 	public static T PrettyPrint<T>(this T obj) {
 		Console.WriteLine(obj.ToPrettyString());
