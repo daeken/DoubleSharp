@@ -23,8 +23,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-
     - name: Setup .NET 7.0
       uses: actions/setup-dotnet@v1
       with:
@@ -34,6 +32,11 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install docfx
+
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: dotnet build DoubleSharp.sln --configuration Releases
 
     - name: DocFX Build
       working-directory: docfx
