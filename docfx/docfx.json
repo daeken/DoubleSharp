@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "files": [ "DoubleSharp/DoubleSharp.csproj" ],
+          "files": [ "DoubleSharp/bin/Release/net7.0/DoubleSharp.dll" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../"
         }
