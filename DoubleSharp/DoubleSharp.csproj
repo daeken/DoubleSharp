@@ -8,7 +8,7 @@
 
         <Description>Ease-of-life features for C# that are not yet in the standard library</Description>
         <PackageTags>linq extensions enumerable progress progressbar concurrency</PackageTags>
-        <Copyright>Copyright (c) 2022 Sera Brocious</Copyright>
+        <Copyright>Copyright (c) 2024 Sera Brocious</Copyright>
         <Description>DoubleSharp provides convenience features for LINQ, concurrency, randomness, progress bars, and more.</Description>
         <RepositoryUrl>https://github.com/daeken/DoubleSharp</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>

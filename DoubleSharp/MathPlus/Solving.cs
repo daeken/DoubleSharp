@@ -83,10 +83,10 @@ public static class Solving {
 		lowerBound ??= (double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity);
 		upperBound ??= (double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity);
 		var objectiveWithGradient = new ForwardDifferenceGradientObjectiveFunction(objective,
-			Vector<double>.Build.DenseOfArray(new[] { lowerBound.Value.X, lowerBound.Value.Y }),
-			Vector<double>.Build.DenseOfArray(new[] { upperBound.Value.X, upperBound.Value.Y }));
+			Vector<double>.Build.DenseOfArray(new[] { lowerBound.Value.X, lowerBound.Value.Y, lowerBound.Value.Z }),
+			Vector<double>.Build.DenseOfArray(new[] { upperBound.Value.X, upperBound.Value.Y, lowerBound.Value.Z }));
 		var result = optimizer.FindMinimum(objectiveWithGradient,
-			Vector<double>.Build.DenseOfArray(new[] { initialGuess.X, initialGuess.Y }));
+			Vector<double>.Build.DenseOfArray(new[] { initialGuess.X, initialGuess.Y, initialGuess.Z }));
 		return (result.MinimizingPoint[0], result.MinimizingPoint[1], result.MinimizingPoint[2]);
 	}
 

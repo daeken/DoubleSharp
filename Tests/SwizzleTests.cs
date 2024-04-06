@@ -7,11 +7,16 @@ public class SwizzleTests {
 	[Test]
 	public void Swizzle2x2() {
 		var vec = new Vector2(6f, 7f);
+		var vecd = new Vector2D(6, 7);
 		Assert.Multiple(() => {
 			Assert.That(vec.XX(), Is.EqualTo(new Vector2(6f, 6f)));
 			Assert.That(vec.XY(), Is.EqualTo(new Vector2(6f, 7f)));
 			Assert.That(vec.YX(), Is.EqualTo(new Vector2(7f, 6f)));
 			Assert.That(vec.YY(), Is.EqualTo(new Vector2(7f, 7f)));
+			Assert.That(vecd.XX(), Is.EqualTo(new Vector2D(6f, 6f)));
+			Assert.That(vecd.XY(), Is.EqualTo(new Vector2D(6f, 7f)));
+			Assert.That(vecd.YX(), Is.EqualTo(new Vector2D(7f, 6f)));
+			Assert.That(vecd.YY(), Is.EqualTo(new Vector2D(7f, 7f)));
 		});
 	}
 

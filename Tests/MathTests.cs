@@ -63,4 +63,29 @@ public class MathTests {
 			Assert.That(6.7.CeilInt(), Is.EqualTo(7));
 		});
 	}
+
+	[Test]
+	public void Lerp() {
+		Assert.Multiple(() => {
+			Assert.That(0f.Lerp(1f, 0), Is.EqualTo(0f));
+			Assert.That(0f.Lerp(1f, 1), Is.EqualTo(1f));
+			Assert.That(0f.Lerp(1f, 0.5f), Is.EqualTo(0.5f));
+			Assert.That(1f.Lerp(0f, 0), Is.EqualTo(1f));
+			Assert.That(1f.Lerp(0f, 1), Is.EqualTo(0f));
+			Assert.That(1f.Lerp(0f, 0.5f), Is.EqualTo(0.5f));
+			Assert.That(1f.Lerp(5f, 0), Is.EqualTo(1f));
+			Assert.That(1f.Lerp(5f, 1), Is.EqualTo(5f));
+			Assert.That(1f.Lerp(5f, 0.5f), Is.EqualTo(3f));
+			
+			Assert.That(0.0.Lerp(1, 0), Is.EqualTo(0));
+			Assert.That(0.0.Lerp(1, 1), Is.EqualTo(1));
+			Assert.That(0.0.Lerp(1, 0.5), Is.EqualTo(0.5));
+			Assert.That(1.0.Lerp(0, 0), Is.EqualTo(1));
+			Assert.That(1.0.Lerp(0, 1), Is.EqualTo(0));
+			Assert.That(1.0.Lerp(0, 0.5), Is.EqualTo(0.5));
+			Assert.That(1.0.Lerp(5, 0), Is.EqualTo(1));
+			Assert.That(1.0.Lerp(5, 1), Is.EqualTo(5));
+			Assert.That(1.0.Lerp(5, 0.5), Is.EqualTo(3));
+		});
+	}
 }

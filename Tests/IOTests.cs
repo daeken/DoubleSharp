@@ -33,6 +33,20 @@ public class IOTests {
 	}
 	
 	[Test]
+	public void DoubleVectorWrite() {
+		Assert.Multiple(() => {
+			var vec = (1, 2).ToVector2D();
+			var bytes = vec.ToArray().AsSpan().Cast<double, byte>().ToArray();
+			using(var ms = new MemoryStream()) {
+				using var bw = new BinaryWriter(ms);
+				bw.Write(vec.XY());
+				bw.Flush();
+				Assert.That(ms.ToArray(), Is.EqualTo(bytes.Take(2 * 8)));
+			}
+		});
+	}
+	
+	[Test]
 	public void VectorRead() {
 		Assert.Multiple(() => {
 			var vec = (1, 2, 3, 4).ToVector();
@@ -48,6 +62,18 @@ public class IOTests {
 			using(var ms = new MemoryStream(bytes)) {
 				using var br = new BinaryReader(ms);
 				Assert.That(br.ReadVector4(), Is.EqualTo(vec));
+			}
+		});
+	}
+	
+	[Test]
+	public void DoubleVectorRead() {
+		Assert.Multiple(() => {
+			var vec = (1, 2).ToVector2D();
+			var bytes = vec.ToArray().AsSpan().Cast<double, byte>().ToArray();
+			using(var ms = new MemoryStream(bytes.Take(2 * 8).ToArray())) {
+				using var br = new BinaryReader(ms);
+				Assert.That(br.ReadVector2D(), Is.EqualTo(vec.XY()));
 			}
 		});
 	}

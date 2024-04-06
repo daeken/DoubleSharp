@@ -161,5 +161,4 @@ public static class FunctionalExtensions {
 	  Func<TInter6, TInter7> inner7,
 	  Func<TInter7, TOutput> outer) =>
 		x => outer(inner7(inner6(inner5(inner4(inner3(inner2(inner1(x))))))));
-
 }

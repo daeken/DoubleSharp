@@ -245,7 +245,6 @@ public static class VectorExtensions {
 	public static Vector3 Max(this Vector3 a, Vector3 b) => Vector3.Max(a, b);
 	/// <inheritdoc cref="Max(Vector2, Vector2)" />
 	public static Vector4 Max(this Vector4 a, Vector4 b) => Vector4.Max(a, b);
-
 	/// <summary>
 	/// Performs linear interpolation.
 	/// </summary>
@@ -255,6 +254,7 @@ public static class VectorExtensions {
 	/// <returns>The linear interpolation of <paramref name="a"/> to <paramref name="b"/> using <paramref name="t"/> in the range 0-1.</returns>
 	public static Vector2 Lerp(this Vector2 a, Vector2 b, float t) => (b - a) * t + a;
 	/// <inheritdoc cref="Lerp(Vector2, Vector2, float)" />
+
 	public static Vector2D Lerp(this Vector2D a, Vector2D b, double t) => (b - a) * t + a;
 	/// <inheritdoc cref="Lerp(Vector2, Vector2, float)" />
 	public static Vector3 Lerp(this Vector3 a, Vector3 b, float t) => (b - a) * t + a;
