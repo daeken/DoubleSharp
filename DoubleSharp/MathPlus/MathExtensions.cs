@@ -136,4 +136,15 @@ public static class MathExtensions {
 	public static uint SetBit(this uint v, int bit, bool cond) => cond ? v | (1U << bit) : v & ~(1U << bit);
 	/// <inheritdoc cref="SetBit(byte, int, bool)" />
 	public static ulong SetBit(this ulong v, int bit, bool cond) => cond ? v | (1UL << bit) : v & ~(1UL << bit);
+	
+	/// <summary>
+	/// Performs linear interpolation.
+	/// </summary>
+	/// <param name="a">The start value.</param>
+	/// <param name="b">The end value.</param>
+	/// <param name="t">A value ranging from 0 to 1.</param>
+	/// <returns>The linear interpolation of <paramref name="a"/> to <paramref name="b"/> using <paramref name="t"/> in the range 0-1.</returns>
+	public static float Lerp(this float a, float b, float t) => (b - a) * t + a;
+	/// <inheritdoc cref="Lerp(float, float, float)" />
+	public static double Lerp(this double a, double b, double t) => (b - a) * t + a;
 }

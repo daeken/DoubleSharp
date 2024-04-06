@@ -31,6 +31,31 @@ public static class SwizzleExtensions {
 	/// <param name="vec">The vector from which to take values.</param>
 	/// <returns>The new vector.</returns>
 	public static Vector2 YY(this Vector2 vec) => new(vec.Y, vec.Y);
+	
+	/// <summary>
+	/// Constructs a new Vector2D with elements from <paramref name="vec"/>: X, X.
+	/// </summary>
+	/// <param name="vec">The vector from which to take values.</param>
+	/// <returns>The new vector.</returns>
+	public static Vector2D XX(this Vector2D vec) => new(vec.X, vec.X);
+	/// <summary>
+	/// Constructs a new Vector2D with elements from <paramref name="vec"/>: X, Y.
+	/// </summary>
+	/// <param name="vec">The vector from which to take values.</param>
+	/// <returns>The new vector.</returns>
+	public static Vector2D XY(this Vector2D vec) => vec;
+	/// <summary>
+	/// Constructs a new Vector2D with elements from <paramref name="vec"/>: Y, X.
+	/// </summary>
+	/// <param name="vec">The vector from which to take values.</param>
+	/// <returns>The new vector.</returns>
+	public static Vector2D YX(this Vector2D vec) => new(vec.Y, vec.X);
+	/// <summary>
+	/// Constructs a new Vector2D with elements from <paramref name="vec"/>: Y, Y.
+	/// </summary>
+	/// <param name="vec">The vector from which to take values.</param>
+	/// <returns>The new vector.</returns>
+	public static Vector2D YY(this Vector2D vec) => new(vec.Y, vec.Y);
 #endregion
 
 #region 3x2 Swizzles

@@ -1,4 +1,5 @@
 using System.Numerics;
+using DoubleSharp.MathPlus;
 
 namespace DoubleSharp.IO; 
 
@@ -11,6 +12,13 @@ public static class BinaryIOExtensions {
 	/// <returns>A Vector2 read from the BinaryReader.</returns>
 	public static Vector2 ReadVector2(this BinaryReader br) =>
 		new(br.ReadSingle(), br.ReadSingle());
+	/// <summary>
+	/// Read a Vector2D from this stream. The current position of the stream is advanced by sixteen.
+	/// </summary>
+	/// <param name="br">The BinaryReader to read from.</param>
+	/// <returns>A Vector2D read from the BinaryReader.</returns>
+	public static Vector2D ReadVector2D(this BinaryReader br) =>
+		new(br.ReadDouble(), br.ReadDouble());
 	/// <summary>
 	/// Read a Vector3 from this stream. The current position of the stream is advanced by twelve.
 	/// </summary>
@@ -32,6 +40,15 @@ public static class BinaryIOExtensions {
 	/// <param name="bw">The BinaryWriter to write to.</param>
 	/// <param name="vec">The Vector2 to write.</param>
 	public static void Write(this BinaryWriter bw, Vector2 vec) {
+		bw.Write(vec.X);
+		bw.Write(vec.Y);
+	}
+	/// <summary>
+	/// Writes a Vector2D to this stream. The current position of the stream is advanced by sixteen.
+	/// </summary>
+	/// <param name="bw">The BinaryWriter to write to.</param>
+	/// <param name="vec">The Vector2D to write.</param>
+	public static void Write(this BinaryWriter bw, Vector2D vec) {
 		bw.Write(vec.X);
 		bw.Write(vec.Y);
 	}
