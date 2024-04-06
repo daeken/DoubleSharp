@@ -1,0 +1,401 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/DoubleSharp/DoubleSharp/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "IaJG/etsfRVCc7jHmkma/T8cWhZ3Ppb2U+vShg5pUaE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Buffers.BufferExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Buffers.BufferExtensions.html",
+          "hash": "eCQuIxTGXshdLvfdTXcJ5MZrohowNeMP1DO9Zl1lLSc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Buffers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Buffers.html",
+          "hash": "d+Jzh5jZcolEImkacAd62mbqqGrEfVOHzdoTx6+7Q8A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Concurrency.ConcurrencyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Concurrency.ConcurrencyExtensions.html",
+          "hash": "ZahWw7ivFz075gq6yu+rUrySXiJlMHqExSfGkMlK4og="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Concurrency.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Concurrency.html",
+          "hash": "S0ebhchXktzjoB+TuQevuwuTcFWUhmPIK+de7oZpPnE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Functional.FunctionalExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Functional.FunctionalExtensions.html",
+          "hash": "m9TpO9roZqGX2Ht8GXg7M4DRgOXfb4YX06+D7mriOi8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Functional.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Functional.html",
+          "hash": "3LD8uolRJ0Gy9w2EMpl0E54fNB8n85O9BaBi+wGJcWI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.IO.BinaryIOExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.IO.BinaryIOExtensions.html",
+          "hash": "7Ca9OQGUROA6DHMnz4ylndEO2+XZ5ZwsRVbdQxJzkHo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.IO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.IO.html",
+          "hash": "o+Cj7Uroso+9hhmn8/z6WknQdZvXXYdRVKmNl4qS1hg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Linq.LinqExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Linq.LinqExtensions.html",
+          "hash": "w2jmnpyteX8p4W4C39YbIzTi4OdnXZEW1slTfkCINtc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Linq.TupleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Linq.TupleExtensions.html",
+          "hash": "ZVqTiA7azitOLH0GwufSjLziyuLOeVjDh30FCLTv+B8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Linq.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Linq.html",
+          "hash": "Q5NRx5r8V2jM0o21YSP4Fz/caiZF85b8yIzhF2JMk2s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.MathExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.MathExtensions.html",
+          "hash": "FypofIXLNFqCXpNPV29kb5vwKCCMBuwrv7y2j9aZ4zA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.Solving.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.Solving.html",
+          "hash": "9qGVjYHALLbhwwhdv8Yi0FtNdP5qIcxGXQ+moJsgwdo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.SwizzleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.SwizzleExtensions.html",
+          "hash": "zxsgdSG4tuTMg3RZjcyuDRn2Dw9umcejpWrv4GIFKMM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.Vector2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.Vector2D.html",
+          "hash": "WmQZBUrPNZPRD6SEbY4lj9ppG8AOH3js62xyNG/PjJk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.VectorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.VectorExtensions.html",
+          "hash": "JEFynF3qTOtf9ALOqg+jT2IFXg5+PDTIb5vn/McSj68="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.MathPlus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.MathPlus.html",
+          "hash": "LMU4O5L5cLDep0+0z1/4E+nrZ+NO/wKZSjiPuwfotQc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Pretty.IPrettyPrintable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Pretty.IPrettyPrintable.html",
+          "hash": "IY1ul2qDiWUzEbdvcNB/dLsouI1ZrW6onwNgYu9CZgI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Pretty.PrettyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Pretty.PrettyExtensions.html",
+          "hash": "pB/DSFwmznx5tmaFhcybyKGHKT0Kxu3OI0FeORwG5u0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Pretty.PrettyPrinterAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Pretty.PrettyPrinterAttribute.html",
+          "hash": "t3yXVaneq8E+q1/hbdvlnj0usuq4MhsZW2k+D1MQa+o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Pretty.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Pretty.html",
+          "hash": "Q9YIexrlwajxuV6SYodPsZQgb8L3d+7dtOXtRmwVNDE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Progress.ProgressExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Progress.ProgressExtensions.html",
+          "hash": "lrN5g7prkTLQGB3lBVIZSHjuNy8+/t5aaOkovIkf+bA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Progress.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Progress.html",
+          "hash": "K31MgeVGd39xXpVjAzHTGNiZBvJx/FWYP37/nX1xiqk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Random.Rng.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Random.Rng.html",
+          "hash": "FhNpnnBMUQAmDzcC/fHJoeK49ydyAIZ9Xs8cOJQn6aM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/DoubleSharp.Random.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DoubleSharp.Random.html",
+          "hash": "S3jQS3tAo7p67WbOT0UtP1fhy3wUH94RKIwfPvbR4N8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "bPZtiZtRdAf9/b3Fhu2q8pYk87zNPcs/E3B7cg2DzvI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "Bv+Psw5Ow9mR9XJ+bRzlvzWRrOiS9uV4lE4L/ZJbZio="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 25,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
